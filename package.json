@@ -9,6 +9,9 @@
   "author": "Kris Kuiper",
   "license": "MIT",
   "devDependencies": {
-    "gulp": "^3.9.1"
-  }
+    "gulp": "^3.9.1",
+    "lodash": "^4.17.11",
+    "minimatch": "^3.0.4"
+  },
+  "dependencies": {}
 }
