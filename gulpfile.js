@@ -2,8 +2,9 @@
 const gulp = require('gulp');
 const uglify = require('gulp-uglify');
 const sass = require('gulp-sass');
-const postcss = require('gulp-postcss');
+const cleanCSS = require('gulp-clean-css');
 const imagemin = require('gulp-imagemin');
+const rename = require('gulp-rename');
 
 sass.compiler = require('node-sass');
 const pump = require('pump');
@@ -12,6 +13,7 @@ const pump = require('pump');
 gulp.task('uglify', function(cb) {
     pump([
         gulp.src('src/scripts/*.js'),
+        rename({suffix: '.min'}),
         uglify(),
         gulp.dest('src/dist/scripts')
     ],
@@ -21,13 +23,14 @@ gulp.task('uglify', function(cb) {
 
 gulp.task('sass', function() {
     return gulp.src('src/sass/app.sass')
-        .pipe(sass().on('error', sass.logError))
+        .pipe(sass())
         .pipe(gulp.dest('src/css'));
 });
 
-gulp.task('postcss', function() {
+gulp.task('minify-css', function() {
     return gulp.src('src/css/app.css')
-        .pipe(postcss())
+        .pipe(rename({suffix: '.min'}))
+        .pipe(cleanCSS({compatibility: 'ie8'}))
         .pipe(gulp.dest('src/dist/css'));
 });
 
@@ -37,5 +40,14 @@ gulp.task('imagemin', function() {
         .pipe(gulp.dest('src/dist/images'));
 });
 
+
+gulp.task('watch', function() {
+    gulp.watch('src/sass/*.sass', ['sass']);
+    gulp.watch('src/scripts/app.js', ['uglify']);
+    gulp.watch('src/css/app.css', ['minify-css']);
+    gulp.watch('src/index.html', ['imagemin']);
+});
+
 // Run all tasks
-gulp.task('default', ['uglify', 'sass', 'postcss', 'imagemin']);
+gulp.task('default', ['watch']);
+
