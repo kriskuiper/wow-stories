@@ -1,5 +1,48 @@
+*
+    box-sizing: border-box 
+
 body
+    padding: 0 10%
+    margin: 0
+    position: relative
+
+ul
+    list-style: none
+    padding: 0
+ 
+button
+    cursor: pointer
+
+input[type=submit]
+    cursor: pointer
+
+ul
     display: flex
-    flex-direction: column
-    
-    
+    justify-content: space-between
+
+header > nav ul
+    align-items: top
+    height: 3em
+    border-bottom: 1px solid lightgrey
+    margin-top: 2em
+    li
+        max-width: 33%
+        img
+            max-width: 5em
+    li > button
+        background-image: url('../images/filter.svg')
+        background-repeat: no-repeat
+        height: 30px
+        width: 30px
+        padding: 0
+        background-size: cover
+        border: none
+
+aside
+    position: absolute
+    top: 5.8em
+    bottom: 0
+    left: 0
+    right: 0
+    display: none
+    padding: 0 10%

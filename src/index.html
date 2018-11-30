@@ -9,60 +9,75 @@
 </head>
 <body>
     <header>
-        <button>Filter</button>
-        <a href="index.html">
-            <img src="dist/images/wow-logo.svg" alt="">
-        </a>
-        <button>Account</button>
+        <nav>
+            <ul>
+                <li>
+                    <button></button>
+                </li>
+                <li>
+                    <a href="index.html">
+                        <img src="dist/images/wow-logo.svg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a href="account.html">
+                        <img src="dist/images/account.svg" alt="Ga naar je account">
+                    </a>
+                </li>
+            </ul>
+        </nav>
         <h1>Wow stories</h1>
     </header>
     <aside>
         <form action="" id="filter">
             <fieldset>
                 <legend>Aantal likes</legend>
-                <label>
-                    <input type="radio">
-                    0-20
-                </label>
-                <label>
-                    <input type="radio">
-                    21-40
-                </label>
-                <label>
-                    <input type="radio">
-                    41-60
-                </label>
-                <label>
-                    <input type="radio">
-                    > 60
-                </label>
+                <p>
+                    <label>
+                        <input type="radio">
+                        0-20
+                    </label>
+                    <label>
+                        <input type="radio">
+                        21-40
+                    </label>
+                    <label>
+                        <input type="radio">
+                        41-60
+                    </label>
+                    <label>
+                        <input type="radio">
+                        > 60
+                    </label>
+                </p>
             </fieldset>
-            <label for="leesduur">Leesduur</label>
-            <input type="range">
+            <label for="leesduur" class="lbl-block">Leesduur</label>
+            <input type="range" min="1" max="30" value="15">
+            <button type="submit">Bekijk 6 verhalen</button>
         </form>
     </aside>
     <section>
         <h2>Sorteer op:</h2>
         <form action="">
-            <label>
-                Genre
-                <input type="radio" name="sorteer" value="genre">
-            </label>
-            <label>
-                Leesduur
-                <input type="radio" name="sorteer" value="leesduur">
-            </label>
-            <label>
-                Populariteit
-                <input type="radio" name="sorteer" value="populariteit">
-            </label>
-            <label>
-                Verras me
-                <input type="radio" name="sorteer" value="verras-me">
-            </label>
-            <!-- Submit button -->
-            <input type="submit" name="sorteer" value="verstuur">
-            <!-- End submit button -->
+            <p>
+                <label>
+                    Genre
+                    <input type="radio" name="sorteer" value="genre">
+                </label>
+                <label>
+                    Leesduur
+                    <input type="radio" name="sorteer" value="leesduur">
+                </label>
+                <label>
+                    Populariteit
+                    <input type="radio" name="sorteer" value="populariteit">
+                </label>
+                <label>
+                    Verras me
+                    <input type="radio" name="sorteer" value="verras-me">
+                </label>
+                <input type="submit" name="sorteer" value="verstuur">
+            </p>
         </form>
     </section>
     <!-- Chaotisch section -->
