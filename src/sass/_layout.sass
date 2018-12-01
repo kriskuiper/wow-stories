@@ -56,21 +56,20 @@ form#filter
 
 /* ====== Genre block with stories styling ===== */
 .genre
-    overflow: hidden
+    position: relative
     & > h2
         color: $dark
         font-weight: 500
-    h3
-        display: none
     & > .stories
         display: flex
-        position: absolute
         max-width: 80vw
         overflow-x: scroll
+        top: 0
         & > article
             border: 1px solid lightgrey
             max-width: 40em
             footer
+                position: relative !important
                 max-height: 14em
                 overflow: hidden
                 & *
