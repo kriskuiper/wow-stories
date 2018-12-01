@@ -32,7 +32,6 @@ form#filter
             border-radius: 100%
             box-shadow: 1px 1px 2px rgba(0, 0, 0, .2)
 
-
     fieldset
         border: none
         width: 100%
@@ -55,7 +54,54 @@ form#filter
         color: white
         background: $secondary-color
 
+/* ====== Genre block with stories styling ===== */
 .genre
     overflow: hidden
+    & > h2
+        color: $dark
+        font-weight: 500
     h3
         display: none
+    & > .stories
+        display: flex
+        position: absolute
+        max-width: 80vw
+        overflow-x: scroll
+        & > article
+            border: 1px solid lightgrey
+            max-width: 40em
+            footer
+                max-height: 14em
+                overflow: hidden
+                & *
+                    display: block
+                img
+                    max-width: 100%
+            header
+                display: flex
+                padding: 20px
+                justify-content: space-between
+                align-items: center
+                text-align: center
+                & > ul
+                    display: block
+                    max-width: 33%
+                    button
+                        margin-bottom: .3em
+                    button#like
+                        background-image: url('../images/likes.svg')
+                    button#download
+                        background-image: url('../images/download.svg')
+                & > section
+                    max-width: 33%
+                    margin: 0 40px
+                    h4
+                        margin: 0
+                        font-weight: 500
+                        font-size: 1.4em
+                        line-height: 1.4
+
+
+    
+
+    

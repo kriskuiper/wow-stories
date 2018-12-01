@@ -11,7 +11,13 @@ ul {
   padding: 0; }
 
 button {
-  cursor: pointer; }
+  cursor: pointer;
+  border: none;
+  height: 2em;
+  width: 2em;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: transparent; }
 
 input[type=submit] {
   cursor: pointer; }
@@ -21,7 +27,7 @@ ul {
   justify-content: space-between; }
 
 header > nav ul {
-  align-items: top;
+  align-items: flex-start;
   height: 3em;
   border-bottom: 1px solid lightgrey;
   margin-top: 2em; }
@@ -30,13 +36,7 @@ header > nav ul {
     header > nav ul li img {
       max-width: 5em; }
   header > nav ul li > button {
-    background-image: url("../images/filter.svg");
-    background-repeat: no-repeat;
-    height: 30px;
-    width: 30px;
-    padding: 0;
-    background-size: cover;
-    border: none; }
+    background-image: url("../images/filter.svg"); }
 
 aside {
   position: absolute;
@@ -50,7 +50,8 @@ aside {
 body {
   font-size: 14px;
   font-weight: 300;
-  font-family: 'Museo Sans'; }
+  font-family: 'Museo Sans';
+  color: #2B4040; }
 
 h1,
 h2,
@@ -125,10 +126,52 @@ form#filter {
     color: white;
     background: #952D87; }
 
+/* ====== Genre block with stories styling ===== */
 .genre {
   overflow: hidden; }
+  .genre > h2 {
+    color: #2B4040;
+    font-weight: 500; }
   .genre h3 {
     display: none; }
+  .genre > .stories {
+    display: flex;
+    position: absolute;
+    max-width: 80vw;
+    overflow-x: scroll; }
+    .genre > .stories > article {
+      border: 1px solid lightgrey;
+      max-width: 40em; }
+      .genre > .stories > article footer {
+        max-height: 14em;
+        overflow: hidden; }
+        .genre > .stories > article footer * {
+          display: block; }
+        .genre > .stories > article footer img {
+          max-width: 100%; }
+      .genre > .stories > article header {
+        display: flex;
+        padding: 20px;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center; }
+        .genre > .stories > article header > ul {
+          display: block;
+          max-width: 33%; }
+          .genre > .stories > article header > ul button {
+            margin-bottom: .3em; }
+          .genre > .stories > article header > ul button#like {
+            background-image: url("../images/likes.svg"); }
+          .genre > .stories > article header > ul button#download {
+            background-image: url("../images/download.svg"); }
+        .genre > .stories > article header > section {
+          max-width: 33%;
+          margin: 0 40px; }
+          .genre > .stories > article header > section h4 {
+            margin: 0;
+            font-weight: 500;
+            font-size: 1.4em;
+            line-height: 1.4; }
 
 /* ======== Sorteer blok styling ======== */
 p {
