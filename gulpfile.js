@@ -45,7 +45,7 @@ gulp.task('watch', function() {
     gulp.watch('src/sass/*.sass', ['sass']);
     gulp.watch('src/scripts/app.js', ['uglify']);
     gulp.watch('src/css/app.css', ['minify-css']);
-    gulp.watch('src/index.html', ['imagemin']);
+    gulp.watch('src/genres.html', ['imagemin']);
 });
 
 // Run all tasks
