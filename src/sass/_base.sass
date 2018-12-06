@@ -35,17 +35,16 @@ header > nav ul
         max-width: 33%
         img
             max-width: 5em
-    li > button
-        background-image: url('../images/filter.svg')
-
-aside
-    position: absolute
-    top: 5.8em
-    bottom: 0
-    left: 0
-    right: 0
-    display: none
-    padding: 0 10%
+        & > button
+            padding: 0
+            height: 2em
+            width: 2em
+            background: pink
+            & > span
+                width: 100%
+                height: 1px
+                background: black
+        
 
 .visually-hidden
     display: none

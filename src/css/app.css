@@ -35,17 +35,15 @@ header > nav ul {
     max-width: 33%; }
     header > nav ul li img {
       max-width: 5em; }
-  header > nav ul li > button {
-    background-image: url("../images/filter.svg"); }
-
-aside {
-  position: absolute;
-  top: 5.8em;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: none;
-  padding: 0 10%; }
+    header > nav ul li > button {
+      padding: 0;
+      height: 2em;
+      width: 2em;
+      background: pink; }
+      header > nav ul li > button > span {
+        width: 100%;
+        height: 1px;
+        background: black; }
 
 .visually-hidden {
   display: none; }
@@ -88,8 +86,13 @@ a {
 /* ===== Form styles ===== */
 form#filter {
   background-color: white;
-  position: relative;
-  height: 87vh; }
+  position: fixed;
+  top: 6.2rem;
+  left: -999vw;
+  z-index: 99;
+  width: 100%;
+  bottom: 0;
+  padding: 0 10%; }
   form#filter label.lbl-block {
     display: block;
     margin-bottom: 20px;
@@ -126,10 +129,11 @@ form#filter {
       width: 100%;
       text-align: center; }
   form#filter button[type="submit"] {
-    position: absolute;
+    position: fixed;
+    font-weight: 900;
+    font-size: 1em;
     bottom: 0;
-    left: 0;
-    right: 0;
+    left: -200vw;
     width: 100%;
     height: 60px;
     color: white;
@@ -145,10 +149,17 @@ form#filter {
     display: flex;
     max-width: 80vw;
     overflow-x: scroll;
-    top: 0; }
+    top: 0;
+    scroll-snap-type: x mandatory;
+    -webkit-scroll-snap-destination: 0% 0%;
+    -webkit-overflow-scrolling: touch; }
+    .genre > .stories::-webkit-scrollbar {
+      display: none; }
     .genre > .stories > article {
       border: 1px solid lightgrey;
-      max-width: 40em; }
+      max-width: 40em;
+      min-width: 25em;
+      scroll-snap-align: center; }
       .genre > .stories > article footer {
         position: relative !important;
         max-height: 14em;
@@ -187,19 +198,19 @@ p {
   justify-content: space-between;
   margin: 0;
   position: relative; }
-  p label:hover {
-    background: #952D87;
-    color: white; }
   p label {
     transition: .2s ease;
     border: 1px solid #952D87;
     width: 26%;
     padding: 1em 2em;
     text-align: center; }
+    p label.active {
+      background: #952D87;
+      color: white; }
     p label input {
       position: absolute;
       display: none; }
-  p input {
+  p input[type="submit"] {
     -webkit-appearance: none;
     opacity: 0;
     position: absolute;
@@ -230,7 +241,7 @@ form#story-search {
   right: 0;
   left: 0;
   bottom: 0;
-  background: #F4EEE8;
+  background: #FFDF5D;
   padding: 2em; }
   form#story-search label {
     display: block;

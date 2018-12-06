@@ -12,7 +12,9 @@
         <nav>
             <ul>
                 <li>
-                    <button></button>
+                    <button>
+                        <span></span>
+                    </button>
                 </li>
                 <li>
                     <a href="index.html">
@@ -28,39 +30,37 @@
         </nav>
         <h1>Wow stories</h1>
     </header>
-    <aside>
-        <form action="" id="filter">
-            <fieldset>
-                <legend>Aantal likes</legend>
-                <p>
-                    <label>
-                        <input type="radio">
-                        0-20
-                    </label>
-                    <label>
-                        <input type="radio">
-                        21-40
-                    </label>
-                    <label>
-                        <input type="radio">
-                        41-60
-                    </label>
-                    <label>
-                        <input type="radio">
-                        > 60
-                    </label>
-                </p>
-            </fieldset>
-            <label for="leesduur" class="lbl-block">Leesduur</label>
-            <input type="range" min="1" max="30" value="15">
-            <button type="submit">Bekijk 6 verhalen</button>
-        </form>
-    </aside>
+    <form action="" id="filter">
+        <fieldset>
+            <legend>Aantal likes</legend>
+            <p>
+                <label>
+                    <input type="radio">
+                    0-20
+                </label>
+                <label>
+                    <input type="radio">
+                    21-40
+                </label>
+                <label>
+                    <input type="radio">
+                    41-60
+                </label>
+                <label>
+                    <input type="radio">
+                    > 60
+                </label>
+            </p>
+        </fieldset>
+        <label for="leesduur" class="lbl-block">Leesduur</label>
+        <input type="range" min="1" max="30" value="15">
+        <button type="submit">Bekijk 6 verhalen</button>
+    </form>
     <section>
         <h2>Sorteer op:</h2>
         <form action="">
             <p>
-                <label>
+                <label class="active">
                     Genre
                     <input type="radio" name="sorteer" value="genre">
                 </label>

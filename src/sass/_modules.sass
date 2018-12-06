@@ -5,19 +5,19 @@ p
     justify-content: space-between
     margin: 0
     position: relative
-    label:hover
-        background: $secondary-color
-        color: white
     label
         transition: .2s ease
         border: 1px solid $secondary-color
         width: 26%
         padding: 1em 2em
         text-align: center
+        &.active
+            background: $secondary-color
+            color: white
         input
             position: absolute
             display: none
-    input
+    input[type="submit"]
         -webkit-appearance: none
         opacity: 0
         position: absolute
@@ -48,7 +48,7 @@ form#story-search
     right: 0
     left: 0
     bottom: 0
-    background: $light
+    background: $primary-y
     padding: 2em
     label
         display: block
