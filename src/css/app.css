@@ -55,7 +55,7 @@ header > nav ul {
   font-weight: 900; }
 
 body {
-  font-size: 14px;
+  font-size: 0.8em;
   font-weight: 300;
   font-family: 'Museo Sans';
   color: #2B4040; }
@@ -95,7 +95,7 @@ form#filter {
   padding: 0 10%; }
   form#filter label.lbl-block {
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 1.3em;
     font-size: 1.6em;
     font-weight: 900;
     color: #952D87;
@@ -123,9 +123,9 @@ form#filter {
     width: 100%;
     padding: 0;
     margin: 0;
-    margin-bottom: 40px; }
+    margin-bottom: 2.6em; }
     form#filter fieldset legend {
-      margin-bottom: 20px;
+      margin-bottom: 1.3em;
       width: 100%;
       text-align: center; }
   form#filter button[type="submit"] {
@@ -135,7 +135,7 @@ form#filter {
     bottom: 0;
     left: -200vw;
     width: 100%;
-    height: 60px;
+    height: 5em;
     color: white;
     background: #952D87; }
 
@@ -170,7 +170,7 @@ form#filter {
           max-width: 100%; }
       .genre > .stories > article header {
         display: flex;
-        padding: 20px;
+        padding: 1.2em;
         justify-content: space-between;
         align-items: center;
         text-align: center; }
@@ -185,7 +185,7 @@ form#filter {
             background-image: url("../images/download.svg"); }
         .genre > .stories > article header > section {
           max-width: 33%;
-          margin: 0 40px; }
+          margin: 0 3.5em; }
           .genre > .stories > article header > section h4 {
             margin: 0;
             font-weight: 500;
@@ -253,7 +253,7 @@ form#story-search {
     padding: 1em;
     width: 100%;
     border-radius: 3px;
-    margin-right: 20px; }
+    margin-right: 1.3em; }
   form#story-search input[type="submit"] {
     max-width: 50%;
     margin-top: 1.6em; }
