@@ -33,7 +33,7 @@
     <form action="" id="filter">
         <fieldset>
             <legend>Aantal likes</legend>
-            <p>
+            <div>
                 <label>
                     <input type="radio">
                     0-20
@@ -50,11 +50,13 @@
                     <input type="radio">
                     > 60
                 </label>
-            </p>
+            </div>
         </fieldset>
-        <label for="leesduur" class="lbl-block">Leesduur</label>
-        <input type="range" min="1" max="30" value="15">
-        <button type="submit">Bekijk 6 verhalen</button>
+        <fieldset>
+            <label for="leesduur" class="lbl-block">Leesduur</label>
+            <input type="range" min="1" max="30" value="15">
+            <button type="submit">Bekijk 6 verhalen</button>
+        </fieldset>
     </form>
     <section>
         <h2>Sorteer op:</h2>
@@ -83,7 +85,7 @@
     <!-- Chaotisch section -->
     <section class="genre">
         <h2>Chaotisch</h2>
-        <main class="stories">
+        <section class="stories">
             <h3 class="visually-hidden">Chaotische verhalen</h3>
             <article class="chaotischVerhaal">
                 <footer>
@@ -154,7 +156,7 @@
                     </ul>
                 </header>
             </article>
-        </main>
+        </section>
     </section>
     <!-- End Chaotisch section -->
     <!-- Humor section -->
