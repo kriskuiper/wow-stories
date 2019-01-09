@@ -28,7 +28,11 @@
                 </li>
             </ul>
         </nav>
-        <h1>Wow stories</h1>
+        <section>
+            <div class="zero-state__background"></div>
+            <h1>Wow stories</h1>
+            <p>Op deze verhalenwebsite van WOW Air vind je prachtig vormgegeven verhalen. Niet alleen leuk om te lezen maar ook om te bekijken!</p>
+        </section>
     </header>
     <form action="" id="filter">
         <fieldset>
@@ -59,25 +63,27 @@
         </fieldset>
     </form>
     <form action="">
-        <fieldset>
+        <fieldset id="sortOptions">
             <legend>Sorteer op:</legend>
-            <label class="active">
-                Genre
-                <input type="radio" name="sorteer" value="genre">
-            </label>
-            <label>
-                Leesduur
-                <input type="radio" name="sorteer" value="leesduur">
-            </label>
-            <label>
-                Populariteit
-                <input type="radio" name="sorteer" value="populariteit">
-            </label>
-            <label>
-                Verras me
-                <input type="radio" name="sorteer" value="verras-me">
-            </label>
-            <input type="submit" name="sorteer" value="verstuur">
+            <div>
+                <label class="active">
+                    Genre
+                    <input type="radio" name="sorteer" value="genre">
+                </label>
+                <label>
+                    Leesduur
+                    <input type="radio" name="sorteer" value="leesduur">
+                </label>
+                <label>
+                    Populariteit
+                    <input type="radio" name="sorteer" value="populariteit">
+                </label>
+                <label>
+                    Verras me
+                    <input type="radio" name="sorteer" value="verras-me">
+                </label>
+                <input type="submit" name="sorteer" value="verstuur">
+                </div>
         </fieldset>
     </form>
     <!-- Chaotisch section -->
@@ -130,8 +136,8 @@
                         <li>Download</li>
                     </ul>
                 </header>
-            </article class="chaotischVerhaal">
-            <article>
+            </article>
+            <article class="chaotischVerhaal">
                 <footer>
                     <a href="">
                         <picture>
@@ -157,11 +163,12 @@
         </section>
     </section>
     <!-- End Chaotisch section -->
-    <button id="story-search_button"></button>
-    <form action="" id="story-search" class="visually-hidden">
-        <label for="searchInput">Zoek een verhaal op naam</label>
-        <input type="search" id="searchInput" placeholder="Zoek op naam...">
-        <input type="submit" class="btn" value="Toon verhalen" id="submitButton">
+    <form action="" id="story-search">
+        <button>Zoek een verhaal</button>
+        <fieldset>
+            <label for="searchInput">Zoek een verhaal op naam</label>
+            <input type="search" id="searchInput" placeholder="Zoek op naam...">
+        </fieldset>
     </form>
     <script src="dist/scripts/app.min.js"></script>
 </body>

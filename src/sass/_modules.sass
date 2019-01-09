@@ -1,67 +1,95 @@
-/* ======== Sorteer blok styling ======== */
+/* Sorteer blok styling */
 
-p
-    display: flex
-    justify-content: space-between
-    margin: 0
-    position: relative
-    label
-        transition: .2s ease
-        border: 1px solid $secondary-color
-        width: 26%
-        padding: 1em 2em
-        text-align: center
-        font-size: 1vw
-        &.active
-            background: $secondary-color
-            color: white
-        input
+fieldset#sortOptions
+    legend 
+        margin-bottom: 1.2em
+    div
+        display: flex
+        justify-content: space-between
+        margin: 0
+        position: relative
+        label
+            transition: .2s ease
+            border: 1px solid $secondary-color
+            width: 26%
+            padding: 1em 2em
+            text-align: center
+            font-size: 1vw
+            &.active
+                background: $secondary-color
+                color: white
+            input
+                position: absolute
+                display: none
+        input[type="submit"]
+            -webkit-appearance: none
+            opacity: 0
             position: absolute
-            display: none
-    input[type="submit"]
-        -webkit-appearance: none
-        opacity: 0
-        position: absolute
-        top: 0
-        bottom: 0
-        left: 0
-        right: 0
-        width: 100%
+            top: 0
+            bottom: 0
+            left: 0
+            right: 0
+            width: 100%
+
+/* End sorteer blok styling */
         
-// floating action button and form
-button#story-search_button
-    background: $secondary-color
-    background-image: url('../images/search.svg')
-    background-repeat: no-repeat
-    background-size: 70%
-    background-position: center
-    border-radius: 100%
-    height: 4rem
-    width: 4rem
-    position: fixed
-    right: 13%
-    bottom: 1.5%
-    z-index: 2
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, .2)
+/* Search on title form + button */
 form#story-search
-    position: fixed
-    z-index: 1
-    right: 0
-    left: 0
-    bottom: 0
-    background: $primary-y
-    padding: 2em
-    label
-        display: block
-        margin-bottom: 1em
-        font-weight: 500
-    input
-        border: none
-        padding: 1em
-        width: 100%
-        border-radius: 3px
-        margin-right: 1.3em
-    input[type="submit"]
-        max-width: 50%
-        margin-top: 1.6em
-    
+    position: relative
+    button
+        background: $secondary-color
+        background-image: url('../images/search.svg')
+        background-repeat: no-repeat
+        background-size: 70%
+        background-position: center
+        border-radius: 100%
+        height: 4rem
+        width: 4rem
+        position: fixed
+        right: 13%
+        bottom: 1.5%
+        z-index: 2
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, .2)
+    fieldset
+        position: fixed
+        z-index: 1
+        right: .3em
+        left: .3em
+        bottom: -500
+        background: $primary-y
+        padding: 2em
+        &.show
+            bottom: 0
+        label
+            display: block
+            margin-bottom: 1em
+            font-weight: 500
+        input
+            border: none
+            padding: 1em
+            width: 100%
+            border-radius: 3px
+            margin-right: 1.3em
+        input[type="submit"]
+            max-width: 50%
+            margin-top: 1.6em
+
+/* End search on type + button */
+
+/* Zero state block */
+
+header:first-child > section
+    position: relative
+    background: $secondary-color
+    opacity: .8
+    padding: 5% 10%
+    margin: 1.5em 0
+    color: white
+    z-index: 999
+    & > h1
+        font-size: 
+
+div.zero-state__background
+    background-image: url('')
+    z-index: 998
+/* End zero state block */
