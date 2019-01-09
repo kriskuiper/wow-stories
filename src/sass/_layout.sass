@@ -62,59 +62,104 @@ form#filter
 /* End filter styles */
 
 /* Genre block with stories styling */
+
+/* End stories block styling */
+    
 .genre
     position: relative
     & > h2
         color: $dark
         font-weight: 500
     & > .stories
-        display: flex
-        max-width: 80vw
+        display: grid
         overflow-x: scroll
-        top: 0
+        grid-template-columns: repeat(24, 25em)
+        column-gap: 2em
         scroll-snap-type: x mandatory
         -webkit-scroll-snap-destination: 0% 0%
         -webkit-overflow-scrolling: touch
+        @media screen and (min-width: 30em)
+            grid-template-columns: repeat(2, 48%)
+            row-gap: 2em
+        @media screen and (min-width: 60em)
+            grid-template-columns: repeat(3, 32.2%)
+        
         &::-webkit-scrollbar
             display: none
         & > article
             border: 1px solid lightgrey
-            max-width: 40em
-            min-width: 25em
+            width: 100%
             scroll-snap-align: center
             footer
-                position: relative !important
-                max-height: 14em
-                overflow: hidden
-                & *
-                    display: block
-                img
-                    max-width: 100%
+                figure
+                    position: relative
+                    margin: 0
+                    overflow: hidden
+                    height: 30em
+
+                    & > img
+                        height: 100%
+                        width: 100%
+                        object-fit: cover
+
+                    figcaption
+                        position: absolute
+                        color: white
+                        font-weight: 300
+                        bottom: 0
+                        left: 1.4em
+                        background: $secondary-color
+                        padding: .5em 2em
             header
-                display: flex
-                padding: 1.2em
-                justify-content: space-between
-                align-items: center
-                text-align: center
-                & > ul
-                    display: block
-                    max-width: 33%
-                    button
-                        margin-bottom: .3em
-                    button#like
-                        background-image: url('../images/likes.svg')
-                    button#download
-                        background-image: url('../images/download.svg')
+                width: 90%
+                padding: 1.4em 1.4em
+                display: grid
+                grid-template-columns: 77% 33%
+                column-gap: .5em
                 & > section
-                    max-width: 33%
-                    margin: 0 3.5em
+                    display: grid
+                    grid-template-columns: 100%
+                    grid-template-rows: 8em 1fr
+                button
+                    padding: 1em
+                    margin-bottom: .3em
+                button#download
+                    background-image: url('../images/download.svg')
+                & > section
+                    justify-self: start
+                    margin: 0
                     h4
+                        text-align: left
                         margin: 0
                         font-weight: 500
                         font-size: 1.4em
                         line-height: 1.4
+                        grid-row: 1/2
+                    p
+                        margin: 0
+                    h4,
+                    p
+                        grid-column: 1/2
 
-/* End stories block styling */
-    
+                    
+                & > ul
+                    text-align: center
+                    justify-self: end
+                    display: block
+                    margin: 0
+                    li
+                        position: relative
+                        margin-bottom: .5em
+                    li:last-child
+                        &::after
+                            content: ""
+                            position: absolute
+                            bottom: -0.7em
+                            left: 0
+                            right: 0
+                            border-top: 4px solid $primary-y
+
+
+                    
 
     

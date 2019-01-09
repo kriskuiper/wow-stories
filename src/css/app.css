@@ -155,59 +155,96 @@ form#filter {
 
 /* End filter styles */
 /* Genre block with stories styling */
+/* End stories block styling */
 .genre {
   position: relative; }
   .genre > h2 {
     color: #2B4040;
     font-weight: 500; }
   .genre > .stories {
-    display: flex;
-    max-width: 80vw;
+    display: grid;
     overflow-x: scroll;
-    top: 0;
+    grid-template-columns: repeat(24, 25em);
+    column-gap: 2em;
     scroll-snap-type: x mandatory;
     -webkit-scroll-snap-destination: 0% 0%;
     -webkit-overflow-scrolling: touch; }
+    @media screen and (min-width: 30em) {
+      .genre > .stories {
+        grid-template-columns: repeat(2, 48%);
+        row-gap: 2em; } }
+    @media screen and (min-width: 60em) {
+      .genre > .stories {
+        grid-template-columns: repeat(3, 32.2%); } }
     .genre > .stories::-webkit-scrollbar {
       display: none; }
     .genre > .stories > article {
       border: 1px solid lightgrey;
-      max-width: 40em;
-      min-width: 25em;
+      width: 100%;
       scroll-snap-align: center; }
-      .genre > .stories > article footer {
-        position: relative !important;
-        max-height: 14em;
-        overflow: hidden; }
-        .genre > .stories > article footer * {
-          display: block; }
-        .genre > .stories > article footer img {
-          max-width: 100%; }
+      .genre > .stories > article footer figure {
+        position: relative;
+        margin: 0;
+        overflow: hidden;
+        height: 30em; }
+        .genre > .stories > article footer figure > img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover; }
+        .genre > .stories > article footer figure figcaption {
+          position: absolute;
+          color: white;
+          font-weight: 300;
+          bottom: 0;
+          left: 1.4em;
+          background: #952D87;
+          padding: .5em 2em; }
       .genre > .stories > article header {
-        display: flex;
-        padding: 1.2em;
-        justify-content: space-between;
-        align-items: center;
-        text-align: center; }
-        .genre > .stories > article header > ul {
-          display: block;
-          max-width: 33%; }
-          .genre > .stories > article header > ul button {
-            margin-bottom: .3em; }
-          .genre > .stories > article header > ul button#like {
-            background-image: url("../images/likes.svg"); }
-          .genre > .stories > article header > ul button#download {
-            background-image: url("../images/download.svg"); }
+        width: 90%;
+        padding: 1.4em 1.4em;
+        display: grid;
+        grid-template-columns: 77% 33%;
+        column-gap: .5em; }
         .genre > .stories > article header > section {
-          max-width: 33%;
-          margin: 0 3.5em; }
+          display: grid;
+          grid-template-columns: 100%;
+          grid-template-rows: 8em 1fr; }
+        .genre > .stories > article header button {
+          padding: 1em;
+          margin-bottom: .3em; }
+        .genre > .stories > article header button#download {
+          background-image: url("../images/download.svg"); }
+        .genre > .stories > article header > section {
+          justify-self: start;
+          margin: 0; }
           .genre > .stories > article header > section h4 {
+            text-align: left;
             margin: 0;
             font-weight: 500;
             font-size: 1.4em;
-            line-height: 1.4; }
+            line-height: 1.4;
+            grid-row: 1/2; }
+          .genre > .stories > article header > section p {
+            margin: 0; }
+          .genre > .stories > article header > section h4,
+          .genre > .stories > article header > section p {
+            grid-column: 1/2; }
+        .genre > .stories > article header > ul {
+          text-align: center;
+          justify-self: end;
+          display: block;
+          margin: 0; }
+          .genre > .stories > article header > ul li {
+            position: relative;
+            margin-bottom: .5em; }
+          .genre > .stories > article header > ul li:last-child::after {
+            content: "";
+            position: absolute;
+            bottom: -0.7em;
+            left: 0;
+            right: 0;
+            border-top: 4px solid #FFDF5D; }
 
-/* End stories block styling */
 /* Sorteer blok styling */
 fieldset#sortOptions legend {
   margin-bottom: 1.2em; }
