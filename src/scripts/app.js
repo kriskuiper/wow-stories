@@ -29,13 +29,17 @@ function toggleSearchForm() {
 theForm.addEventListener('click', toggleSearchForm);
 // Einde animatie
 
-// Animeer het filter in on click
+// Animeer het filter in on click (inclusief de hamburger strepen)
 var theFilter = document.querySelector('form#filter');
 var filterButton = document.querySelector('header > nav button');
+var buttonStripes = document.querySelectorAll('header > nav button > span');
 
 function toggleFilter() {
     theFilter.classList.toggle('show');
-    document.body.classList.toggle('noScroll')
+    buttonStripes.forEach(function(buttonStripe){
+        buttonStripe.classList.toggle('is-open');
+    });
+    document.body.classList.toggle('noScroll');
 }
 
 filterButton.addEventListener('click', toggleFilter);
