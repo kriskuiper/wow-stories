@@ -3,6 +3,7 @@
   box-sizing: border-box; }
 
 body {
+  min-height: 100vh;
   padding: 0 5%;
   margin: 0;
   position: relative; }
@@ -104,14 +105,13 @@ form#filter {
   top: 5.5rem;
   left: -100vw;
   z-index: 9999;
-  width: 100%;
+  width: 99%;
   bottom: 0;
   padding: 5rem 10%;
-  transition: .6s ease-in;
-  border-left: 6px solid #952D87;
-  border-right: 6px solid #952D87; }
+  transition: .6s ease-in; }
   form#filter.show {
-    left: 0; }
+    left: 6px;
+    right: 6px; }
   form#filter label.lbl-block {
     display: block;
     margin-bottom: 1.3em;
@@ -149,16 +149,34 @@ form#filter {
       text-align: center; }
   form#filter button[type="submit"] {
     font-weight: 900;
+    text-transform: uppercase;
+    border-radius: 3px;
     font-size: 1em;
     margin: 0 auto;
-    padding: 2em;
+    padding: 2em 4em;
     color: white;
     background: #952D87;
     margin-top: 8em; }
 
+/* Filter result page styles */
+body > section:first-of-type > ul {
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 1.4em 0; }
+  body > section:first-of-type > ul li {
+    max-width: 15em;
+    text-align: center;
+    font-size: .8em;
+    margin-right: .5em;
+    padding: 1em 2em;
+    color: white;
+    font-weight: 300;
+    border-radius: 3px;
+    background: #FFDF5D; }
+
+/* End filter result page styles */
 /* End filter styles */
 /* Genre block with stories styling */
-/* End stories block styling */
 .genre {
   position: relative; }
   .genre > h2 {
@@ -249,6 +267,7 @@ form#filter {
             right: 0;
             border-top: 4px solid #FFDF5D; }
 
+/* End stories block styling */
 /* Sorteer blok styling */
 fieldset#sortOptions legend {
   margin-bottom: 1.2em; }

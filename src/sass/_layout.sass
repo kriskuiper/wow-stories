@@ -5,14 +5,13 @@ form#filter
     top: 5.5rem
     left: -100vw
     z-index: 9999
-    width: 100%
+    width: 99%
     bottom: 0
     padding: 5rem 10%
     transition: .6s ease-in
-    border-left: 6px solid $secondary-color
-    border-right: 6px solid $secondary-color
     &.show
-        left: 0
+        left: 6px
+        right: 6px
 
 
     label.lbl-block
@@ -56,19 +55,38 @@ form#filter
 
     button[type="submit"]
         font-weight: 900
+        text-transform: uppercase
+        border-radius: 3px
         font-size: 1em
         margin: 0 auto
-        padding: 2em
+        padding: 2em 4em
         color: white
         background: $secondary-color
         margin-top: 8em
+
+/* Filter result page styles */
+
+body > section:first-of-type > ul
+    justify-content: center
+    flex-wrap: wrap
+    margin: 1.4em 0
+    li
+        max-width: 15em
+        text-align: center
+        font-size: .8em
+        margin-right: .5em 
+        padding: 1em 2em
+        color: white
+        font-weight: 300
+        border-radius: 3px
+        background: $primary-y
+
+/* End filter result page styles */
 
 /* End filter styles */
 
 /* Genre block with stories styling */
 
-/* End stories block styling */
-    
 .genre
     position: relative
     & > h2
@@ -163,6 +181,8 @@ form#filter
                             left: 0
                             right: 0
                             border-top: 4px solid $primary-y
+
+/* End stories block styling */
 
 
                     
