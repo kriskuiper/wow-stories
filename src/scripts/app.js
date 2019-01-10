@@ -1,14 +1,31 @@
-var searchForm = document.getElementById('story-search');
-var searchButton = document.getElementById('story-search_button');
-var toonVerhalenButton = document.getElementById('submitButton');
+// Animeer het zoekformulier in on click
+var theForm = document.querySelector('form#story-search');
+var searchButton = document.querySelector('form#story-search > button');
+var theInput = document.querySelector('form#story-search > fieldset');
+var searchField = document.querySelector('form#story-search > fieldset input');
+var isShown = false;
 
-function viewSearchForm() {
-    searchForm.classList.toggle('visually-hidden');
-    searchForm.classList.toggle('show');
+function toggleSearchForm() {
+    if (!isShown) {
+        theInput.classList.add('show');
+        searchButton.classList.add('hide');
+    
+        searchField.focus();
+    
+        event.preventDefault();
+        console.log('form is shown');
+        isShown = true;
+    }
+    else {
+        theInput.classList.remove('show');
+        searchButton.classList.remove('hide');
 
-    searchButton.classList.toggle('visually-hidden');
+        event.preventDefault();
+        console.log('form is gone');
+        isShown = false;
+    }
 }
 
-searchButton.addEventListener('click', viewSearchForm);
-submitButton.addEventListener('click', viewSearchForm);
+theForm.addEventListener('click', toggleSearchForm);
+// Einde animatie
 
