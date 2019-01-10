@@ -29,3 +29,14 @@ function toggleSearchForm() {
 theForm.addEventListener('click', toggleSearchForm);
 // Einde animatie
 
+// Animeer het filter in on click
+var theFilter = document.querySelector('form#filter');
+var filterButton = document.querySelector('header > nav button');
+
+function toggleFilter() {
+    theFilter.classList.toggle('show');
+    document.body.classList.toggle('noScroll')
+}
+
+filterButton.addEventListener('click', toggleFilter);
+// Einde filter animatie

@@ -2,12 +2,18 @@
 form#filter
     background-color: white
     position: fixed
-    top: 6.2rem
-    left: -999vw
-    z-index: 99
+    top: 5.5rem
+    left: -100vw
+    z-index: 9999
     width: 100%
     bottom: 0
-    padding: 0 10%
+    padding: 5rem 10%
+    transition: .6s ease-in
+    border-left: 6px solid $secondary-color
+    border-right: 6px solid $secondary-color
+    &.show
+        left: 0
+
 
     label.lbl-block
         display: block
@@ -49,15 +55,13 @@ form#filter
                 
 
     button[type="submit"]
-        position: fixed
         font-weight: 900
         font-size: 1em
-        bottom: 0
-        left: -200vw
-        width: 100%
-        height: 5em
+        margin: 0 auto
+        padding: 2em
         color: white
         background: $secondary-color
+        margin-top: 8em
 
 /* End filter styles */
 
@@ -78,17 +82,18 @@ form#filter
         scroll-snap-type: x mandatory
         -webkit-scroll-snap-destination: 0% 0%
         -webkit-overflow-scrolling: touch
-        @media screen and (min-width: 30em)
+        @media screen and (min-width: 40em)
             grid-template-columns: repeat(2, 48%)
             row-gap: 2em
         @media screen and (min-width: 60em)
-            grid-template-columns: repeat(3, 32.2%)
+            grid-template-columns: repeat(3, 31.7%)
         
         &::-webkit-scrollbar
             display: none
         & > article
             border: 1px solid lightgrey
-            width: 100%
+            min-width: 90%
+            max-width: 100%
             scroll-snap-align: center
             footer
                 figure

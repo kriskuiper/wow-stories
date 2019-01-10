@@ -10,6 +10,8 @@ body {
     body {
       border: 0.5em solid #952D87;
       padding: 0 10%; } }
+  body.noScroll {
+    overflow: hidden; }
 
 ul {
   list-style: none;
@@ -18,8 +20,6 @@ ul {
 button {
   cursor: pointer;
   border: none;
-  height: 2em;
-  width: 2em;
   background-repeat: no-repeat;
   background-size: cover;
   background-color: transparent;
@@ -101,12 +101,17 @@ a {
 form#filter {
   background-color: white;
   position: fixed;
-  top: 6.2rem;
-  left: -999vw;
-  z-index: 99;
+  top: 5.5rem;
+  left: -100vw;
+  z-index: 9999;
   width: 100%;
   bottom: 0;
-  padding: 0 10%; }
+  padding: 5rem 10%;
+  transition: .6s ease-in;
+  border-left: 6px solid #952D87;
+  border-right: 6px solid #952D87; }
+  form#filter.show {
+    left: 0; }
   form#filter label.lbl-block {
     display: block;
     margin-bottom: 1.3em;
@@ -143,15 +148,13 @@ form#filter {
       width: 100%;
       text-align: center; }
   form#filter button[type="submit"] {
-    position: fixed;
     font-weight: 900;
     font-size: 1em;
-    bottom: 0;
-    left: -200vw;
-    width: 100%;
-    height: 5em;
+    margin: 0 auto;
+    padding: 2em;
     color: white;
-    background: #952D87; }
+    background: #952D87;
+    margin-top: 8em; }
 
 /* End filter styles */
 /* Genre block with stories styling */
@@ -169,18 +172,19 @@ form#filter {
     scroll-snap-type: x mandatory;
     -webkit-scroll-snap-destination: 0% 0%;
     -webkit-overflow-scrolling: touch; }
-    @media screen and (min-width: 30em) {
+    @media screen and (min-width: 40em) {
       .genre > .stories {
         grid-template-columns: repeat(2, 48%);
         row-gap: 2em; } }
     @media screen and (min-width: 60em) {
       .genre > .stories {
-        grid-template-columns: repeat(3, 32.2%); } }
+        grid-template-columns: repeat(3, 31.7%); } }
     .genre > .stories::-webkit-scrollbar {
       display: none; }
     .genre > .stories > article {
       border: 1px solid lightgrey;
-      width: 100%;
+      min-width: 90%;
+      max-width: 100%;
       scroll-snap-align: center; }
       .genre > .stories > article footer figure {
         position: relative;

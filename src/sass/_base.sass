@@ -10,6 +10,8 @@ body
     @media screen and (min-width: 30em)
         border: .5em solid $secondary-color
         padding: 0 10%
+    &.noScroll
+        overflow: hidden
 
 ul
     list-style: none
@@ -18,8 +20,6 @@ ul
 button
     cursor: pointer
     border: none
-    height: 2em
-    width: 2em
     background-repeat: no-repeat
     background-size: cover
     background-color: transparent
