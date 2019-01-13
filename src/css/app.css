@@ -81,7 +81,7 @@ header > nav ul {
         transform-origin: top left; }
 
 .visually-hidden {
-  display: none; }
+  display: none !important; }
 
 .btn {
   color: white;

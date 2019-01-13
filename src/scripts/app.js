@@ -44,3 +44,56 @@ function toggleFilter() {
 
 filterButton.addEventListener('click', toggleFilter);
 // Einde filter animatie
+
+// Filter verhalen on type
+// Verkrijg de input van de gebruiker
+function checkUserInput(userInput) {
+    userInput = searchField.value;
+    return userInput;
+}
+
+// Verkrijg de verhalenblokken uit de website
+
+// Zorg dat je de articles kan hitten met een class ipv alleen de titel
+function returnParent(e) {
+    var parent = e.parentElement;
+    return parent;
+}
+
+function returnGrandParent(parent) {
+    var grandParent = returnParent(parent).parentElement;
+    return grandParent;
+}
+
+function returnArticle(grandParent) {
+    var article = returnGrandParent(grandParent).parentElement;
+    return article;
+}
+
+// Verkrijg alle verhalentitels uit de website
+function getTitles(titles) {
+    titles = document.querySelectorAll('.stories article h4');
+    return titles;
+}
+
+// Filter de verhalen
+function filterStories(input, titles) {
+    checkUserInput();
+    getTitles();
+
+    input = checkUserInput();
+    titles = getTitles();
+    
+
+    // Wanneer de titel gelijk is aan de input of er geen input is, toon dan elk verhaal
+    titles.forEach(function(title) {
+        if (input === "" || title.textContent === input) {
+            returnArticle(title).classList.remove('visually-hidden');
+        } else {
+            returnArticle(title).classList.add('visually-hidden');
+        }
+    });
+}
+
+searchField.addEventListener('keyup', filterStories);
+// Einde verhalenfilter
