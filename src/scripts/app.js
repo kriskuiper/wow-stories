@@ -87,7 +87,7 @@ function filterStories(input, titles) {
 
     // Wanneer de titel gelijk is aan de input of er geen input is, toon dan elk verhaal
     titles.forEach(function(title) {
-        if (input === "" || title.textContent === input) {
+        if (input === "" || title.textContent.includes(input)) {
             returnArticle(title).classList.remove('visually-hidden');
         } else {
             returnArticle(title).classList.add('visually-hidden');
@@ -97,3 +97,7 @@ function filterStories(input, titles) {
 
 searchField.addEventListener('input', filterStories);
 // Einde verhalenfilter
+
+// Pas getal achter het genre aan aan het aantal verhalen dat in de lijst staat
+
+// Einde getalaanpassing
