@@ -95,5 +95,5 @@ function filterStories(input, titles) {
     });
 }
 
-searchField.addEventListener('keyup', filterStories);
+searchField.addEventListener('input', filterStories);
 // Einde verhalenfilter
