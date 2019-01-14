@@ -259,6 +259,8 @@ body > section:first-of-type > ul {
           margin-bottom: .3em; }
         .genre > .stories > article header button#download {
           background-image: url("../images/download.svg"); }
+        .genre > .stories > article header button#downloaded {
+          background-image: url("../images/downloaded.svg"); }
         .genre > .stories > article header > section {
           justify-self: start;
           margin: 0; }

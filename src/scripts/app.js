@@ -100,4 +100,6 @@ searchField.addEventListener('input', filterStories);
 
 // Pas getal achter het genre aan aan het aantal verhalen dat in de lijst staat
 
+
+
 // Einde getalaanpassing

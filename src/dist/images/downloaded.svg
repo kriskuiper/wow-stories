@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="34.551" height="34.551" viewBox="0 0 34.551 34.551">
+  <g id="Group_208" data-name="Group 208" transform="translate(-283.725 -330.725)">
+    <g id="Group_219" data-name="Group 219">
+      <g id="Group_29" data-name="Group 29" transform="translate(-1.428 -224.562)">
+        <line id="Line_2" data-name="Line 2" x2="2.468" y2="2.831" transform="translate(298.5 573.118)" fill="none" stroke="#952d87" stroke-linecap="round" stroke-width="3"/>
+        <line id="Line_3" data-name="Line 3" x1="5.386" y2="5.449" transform="translate(300.968 570.5)" fill="none" stroke="#952d87" stroke-linecap="round" stroke-width="3"/>
+      </g>
+      <g id="baseline-smartphone-24px" transform="translate(283.725 330.725)">
+        <path id="Path_37" data-name="Path 37" d="M0,0H34.551V34.551H0Z" fill="none"/>
+        <path id="Path_38" data-name="Path 38" d="M22.275,1.014,7.879,1A2.888,2.888,0,0,0,5,3.879V29.792a2.888,2.888,0,0,0,2.879,2.879h14.4a2.888,2.888,0,0,0,2.879-2.879V3.879A2.875,2.875,0,0,0,22.275,1.014Zm0,25.9H7.879V6.758h14.4Z" transform="translate(2.198 0.44)" fill="#952d87"/>
+      </g>
+    </g>
+  </g>
+</svg>
