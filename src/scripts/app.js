@@ -89,10 +89,7 @@ function filterStories() {
     titles.forEach(function(title) {
         results.classList.remove('visually-hidden');
         results.textContent = resultItems.length + " resultaten gevonden."
-        if (input === "") {
-            results.classList.add('visually-hidden');
-        }
-        else if (input === "" || title.textContent.toLowerCase().includes(input.toLowerCase())) {
+        if (input === "" || title.textContent.toLowerCase().includes(input.toLowerCase())) {
             returnArticle(title).classList.remove('visually-hidden');
             returnArticle(title).classList.add('result');
         } else {
@@ -169,4 +166,4 @@ function checkStories() {
     storyChecker(fourthStories, [], fourthStoriesTitle, "Liefde");    
 }
 
-searchField.addEventListener('keydown', checkStories);
+searchField.addEventListener('input', checkStories);
