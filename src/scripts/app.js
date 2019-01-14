@@ -75,7 +75,7 @@ function getTitles(titles) {
 
 // Verkrijg de p die het aantal resultaten weergeeft
 var results = document.querySelector('body > section:first-of-type > p');
-
+var resultItems = document.getElementsByClassName('result');
 // Filter de verhalen
 function filterStories() {
     checkUserInput();
@@ -83,7 +83,6 @@ function filterStories() {
 
     var input = checkUserInput();
     var titles = getTitles();
-    var resultItems = document.getElementsByClassName('result');
     
 
     // Wanneer de titel gelijk is aan de input of er geen input is, toon dan elk verhaal
@@ -103,7 +102,7 @@ function filterStories() {
     });
 }
 
-searchField.addEventListener('keyup', filterStories);
+searchField.addEventListener('input', filterStories);
 // Einde verhalenfilter
 
 // Download animation
@@ -132,3 +131,42 @@ for (i = 0; i < downloadButtons.length; i++) {
     downloadButtons[i].addEventListener('click', loadingState);
 }
 // End download animation
+
+// Change the number of the results at each Genre
+var firstStories = document.querySelectorAll('body > section:nth-of-type(2) > section > article');
+var secondStories = document.querySelectorAll('body > section:nth-of-type(3) > section > article');
+var thirdStories = document.querySelectorAll('body > section:nth-of-type(4) > section > article');
+var fourthStories = document.querySelectorAll('body > section:nth-of-type(5) > section > article');
+
+var firstStoriesTitle = document.querySelector('body > section:nth-of-type(2) > h2');
+var secondStoriesTitle = document.querySelector('body > section:nth-of-type(3) > h2');
+var thirdStoriesTitle = document.querySelector('body > section:nth-of-type(4) > h2');
+var fourthStoriesTitle = document.querySelector('body > section:nth-of-type(5) > h2');
+
+// Set the initial state of the titles
+firstStoriesTitle.textContent = "Chaotisch" + " (" + firstStories.length + ")";
+secondStoriesTitle.textContent = "Humor" + " (" + secondStories.length + ")";
+thirdStoriesTitle.textContent = "Horror" + " (" + thirdStories.length + ")";
+fourthStoriesTitle.textContent = "Liefde" + " (" + fourthStories.length + ")";
+
+// Change the number of results
+// Function that takes all vars of every story as arguments
+function storyChecker(listOfStories, updatedStoryList, storiesTitleElement, titleName) {
+    updatedStoryList = [];
+
+    listOfStories.forEach(function(story) {
+        if (story.classList.contains('result')) {
+            updatedStoryList.push(story);
+            storiesTitleElement.textContent = titleName + " (" + updatedStoryList.length + ")";
+        }
+    });
+}
+
+function checkStories() {
+    storyChecker(firstStories, [], firstStoriesTitle, "Chaotisch");
+    storyChecker(secondStories, [], secondStoriesTitle, "Humor");
+    storyChecker(thirdStories, [], thirdStoriesTitle, "Horror");
+    storyChecker(fourthStories, [], fourthStoriesTitle, "Liefde");    
+}
+
+searchField.addEventListener('keydown', checkStories);
