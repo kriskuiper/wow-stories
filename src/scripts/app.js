@@ -13,7 +13,6 @@ function toggleSearchForm() {
         searchField.focus();
     
         event.preventDefault();
-        console.log('form is shown');
         isShown = true;
     }
     else {
@@ -21,7 +20,6 @@ function toggleSearchForm() {
         searchButton.classList.remove('hide');
 
         event.preventDefault();
-        console.log('form is gone');
         isShown = false;
     }
 }
@@ -52,7 +50,6 @@ function checkUserInput(userInput) {
     return userInput;
 }
 
-// Verkrijg de verhalenblokken uit de website
 
 // Zorg dat je de articles kan hitten met een class ipv alleen de titel
 function returnParent(e) {
@@ -76,30 +73,62 @@ function getTitles(titles) {
     return titles;
 }
 
+// Verkrijg de p die het aantal resultaten weergeeft
+var results = document.querySelector('body > section:first-of-type > p');
+
 // Filter de verhalen
-function filterStories(input, titles) {
+function filterStories() {
     checkUserInput();
     getTitles();
 
-    input = checkUserInput();
-    titles = getTitles();
+    var input = checkUserInput();
+    var titles = getTitles();
+    var resultItems = document.getElementsByClassName('result');
     
 
     // Wanneer de titel gelijk is aan de input of er geen input is, toon dan elk verhaal
     titles.forEach(function(title) {
-        if (input === "" || title.textContent.toLowerCase().includes(input.toLowerCase())) {
+        results.classList.remove('visually-hidden');
+        results.textContent = resultItems.length + " resultaten gevonden."
+        if (input === "") {
+            results.classList.add('visually-hidden');
+        }
+        else if (input === "" || title.textContent.toLowerCase().includes(input.toLowerCase())) {
             returnArticle(title).classList.remove('visually-hidden');
+            returnArticle(title).classList.add('result');
         } else {
             returnArticle(title).classList.add('visually-hidden');
+            returnArticle(title).classList.remove('result');
         }
     });
 }
 
-searchField.addEventListener('input', filterStories);
+searchField.addEventListener('keyup', filterStories);
 // Einde verhalenfilter
 
-// Pas getal achter het genre aan aan het aantal verhalen dat in de lijst staat
+// Download animation
 
+// Grijp alle downloadbuttons
+var downloadButtons = document.querySelectorAll('#download');
 
+// Zorg dat de classlist wordt aangepast op hetgeen de gebruiker klikt
 
-// Einde getalaanpassing
+function loadingState() {
+    // Bind this to the function so that setTimeout doesn't set it to the window
+    var e = this;
+
+    e.classList.add('loading');
+    setTimeout(function() {
+        e.classList.remove('loading');
+        e.classList.add('finished');
+
+        // Pas de text van de onderliggende li aan naar "Gedownload"
+        e.parentElement.nextElementSibling.textContent = "Gedownload";
+    }, 3600);
+}
+
+// Voeg de eventListener toe aan elke downloadbutton
+for (i = 0; i < downloadButtons.length; i++) {
+    downloadButtons[i].addEventListener('click', loadingState);
+}
+// End download animation

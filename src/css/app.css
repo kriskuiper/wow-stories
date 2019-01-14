@@ -90,6 +90,12 @@ header > nav ul {
   font-weight: 900; }
 
 /* End generic styles */
+/* Resultaten section */
+body > section:first-of-type {
+  text-align: center; }
+  body > section:first-of-type > h2 {
+    display: none; }
+
 /* Text styles */
 body {
   font-size: 0.8em;
@@ -404,3 +410,26 @@ header:first-child > section {
       margin: .25em auto; }
 
 /* End zero state block */
+@keyframes loading {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+button#download {
+  transition: .4s; }
+
+button#download.loading {
+  background-image: none !important;
+  animation-name: loading;
+  animation-duration: 2s;
+  animation-iteration-count: 3;
+  animation-fill-mode: forwards;
+  border-radius: 50%;
+  border: 6px solid;
+  border-top-color: #952D87;
+  border-left-color: #952D87;
+  border-bottom-color: #952D87; }
+
+button#download.finished {
+  background-image: url("../images/downloaded.svg") !important; }
