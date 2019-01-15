@@ -88,13 +88,23 @@ function filterStories() {
     // Wanneer de titel gelijk is aan de input of er geen input is, toon dan elk verhaal
     titles.forEach(function(title) {
         results.classList.remove('visually-hidden');
-        results.textContent = resultItems.length + " resultaten gevonden."
-        if (input === "" || title.textContent.toLowerCase().includes(input.toLowerCase())) {
+        results.textContent = resultItems.length + " verhalen gevonden."
+        if (input === "") {
+            results.classList.add('visually-hidden');
+            returnArticle(title).classList.remove('visually-hidden');
+
+        } else if (input === "" || title.innerText.toLowerCase().includes(input.toLowerCase())) {
             returnArticle(title).classList.remove('visually-hidden');
             returnArticle(title).classList.add('result');
-        } else {
+        } else if (!title.textContent.toLowerCase().includes(input.toLowerCase())) {
             returnArticle(title).classList.add('visually-hidden');
             returnArticle(title).classList.remove('result');
+            results.textContent = "Sorry, we hebben het verhaal " + checkUserInput() + " niet gevonden";
+
+            firstStoriesTitle.textContent = "Chaotisch (0)";
+            secondStoriesTitle.textContent = "Humor (0)";
+            thirdStoriesTitle.textContent = "Horror (0)";
+            fourthStoriesTitle.textContent = "Liefde (0)";
         }
     });
 }
