@@ -144,7 +144,7 @@ form#filter {
   z-index: 9999;
   bottom: 0;
   padding: 5rem 10%;
-  transition: .5s ease; }
+  transition: all .6s ease; }
   form#filter.show {
     left: .5rem;
     right: .5rem; }
@@ -163,7 +163,8 @@ form#filter {
     height: .6rem;
     background: #F4EEE8;
     border-radius: 50rem;
-    cursor: pointer; }
+    cursor: pointer;
+    position: relative; }
     form#filter input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
       -moz-appearance: none;
@@ -172,7 +173,22 @@ form#filter {
       height: 1.3rem;
       background: #952D87;
       border-radius: 100%;
-      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); }
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      position: relative; }
+    form#filter input[type="range"]::before {
+      content: "0 min";
+      color: #2B4040;
+      position: absolute;
+      top: 2em;
+      left: 0;
+      font-size: 1.2em; }
+    form#filter input[type="range"]::after {
+      content: "30 min";
+      color: #2B4040;
+      position: absolute;
+      top: 2em;
+      right: 0;
+      font-size: 1.2em; }
   form#filter fieldset {
     border: none;
     width: 100%;
