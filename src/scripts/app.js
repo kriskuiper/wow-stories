@@ -76,6 +76,16 @@ function getTitles(titles) {
 // Verkrijg de p die het aantal resultaten weergeeft
 var results = document.querySelector('body > section:first-of-type > p');
 var resultsSection = document.querySelector('body > section:first-of-type');
+var fallBackButton = document.querySelector('body > section:first-of-type > button');
+
+fallBackButton.addEventListener('click', fixInput);
+
+function fixInput() {
+    // Verander de input naar 'droom'.
+    searchField.value = "Droom";
+    // Filter stories on the searchField value, in this case droom
+    filterStories();
+}
 
 // Tag de resultaten met een class zodat er bijgehouden kan worden hoeveel resultaten er zijn
 var resultItems = document.getElementsByClassName('result');
@@ -95,26 +105,19 @@ function filterStories() {
         results.textContent = resultItems.length + " verhalen gevonden."
         if (input === "") {
             results.classList.add('visually-hidden');
+            fallBackButton.classList.add('visually-hidden');
             returnArticle(title).classList.remove('visually-hidden');
 
-            allGenreTitles.forEach(function(genreTitle) {
-                genreTitle.classList.remove('visually-hidden');
-            });
-
-        } else if (input === "" || title.innerText.toLowerCase().includes(input.toLowerCase())) {
+        } else if (input === "" || title.textContent.toLowerCase().includes(input.toLowerCase())) {
             returnArticle(title).classList.remove('visually-hidden');
             returnArticle(title).classList.add('result');
+            fallBackButton.classList.add('visually-hidden');
 
-            allGenreTitles.forEach(function(genreTitle) {
-                genreTitle.classList.remove('visually-hidden');
-            });
-        } else if (!title.textContent.toLowerCase().includes(input.toLowerCase())) {
+        } else if (input && !title.textContent.toLowerCase().includes(input.toLowerCase())) {
             returnArticle(title).classList.add('visually-hidden');
             returnArticle(title).classList.remove('result');
-
-            allGenreTitles.forEach(function(genreTitle) {
-                genreTitle.classList.add('visually-hidden');
-            });
+            fallBackButton.classList.remove('visually-hidden');
+            results.textContent = "Oeps, we hebben geen resultaten kunnen vinden voor " + input + ", bedoelde je misschien 'Droom'?"
         }
     });
 }
