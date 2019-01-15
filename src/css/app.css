@@ -135,6 +135,9 @@ a {
   font-size: 0.8em;
   font-weight: 700; }
 
+input {
+  font-size: 1rem; }
+
 /* End text styles */
 /* Filter styles */
 form#filter {
@@ -182,14 +185,14 @@ form#filter {
       position: absolute;
       top: 2em;
       left: 0;
-      font-size: 1.2em; }
+      font-size: 1em; }
     form#filter input[type="range"]::after {
       content: "30 min";
       color: #2B4040;
       position: absolute;
       top: 2em;
       right: 0;
-      font-size: 1.2em; }
+      font-size: 1em; }
   form#filter fieldset {
     border: none;
     width: 100%;
@@ -467,7 +470,7 @@ body > section:first-of-type > button {
 body > section:first-of-type > p {
   max-width: 30em;
   margin: 0 auto;
-  font-weight: 400; }
+  font-weight: 700; }
 
 /* End styles for searchform error state button */
 /* Styles for download interaction */
