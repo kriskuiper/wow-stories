@@ -13,8 +13,8 @@ body {
       padding: 0 10%; } }
   body.noScroll {
     overflow: hidden; }
-  body > section:last-of-type {
-    margin-bottom: 4em; }
+  body > section {
+    margin: 2em 0; }
 
 ul {
   list-style: none;
@@ -412,6 +412,23 @@ header:first-child > section {
       margin: .25em auto; }
 
 /* End zero state block */
+/* Styles for surprise interaction */
+section.stories:first-of-type.loading {
+  width: 5em;
+  height: 5em;
+  margin: 0 auto;
+  animation-name: loading;
+  animation-duration: 2s;
+  animation-iteration-count: 3;
+  animation-fill-mode: forwards;
+  border-radius: 50%;
+  border: 8px solid;
+  border-top-color: #952D87;
+  border-left-color: #952D87;
+  border-right-color: transparent;
+  border-bottom-color: #952D87; }
+
+/* End styles for surprise interaction */
 /* Styles for download interaction */
 @keyframes loading {
   0% {
@@ -448,4 +465,28 @@ button#download.finished {
   background-image: url("../images/downloaded.svg") !important; }
 
 /* Pop up's when download did or did not succeed */
+body > div {
+  transition: .5s ease;
+  text-align: center;
+  color: #2B4040;
+  position: fixed;
+  font-size: 1.2em;
+  z-index: 999;
+  right: .4rem;
+  left: .4rem;
+  bottom: -999px;
+  padding: 0 5%; }
+  @media screen and (min-width: 30em) {
+    body > div {
+      padding: 2em 10%; } }
+
+body > div.show {
+  bottom: 0; }
+
+body > div.error {
+  background-color: #FFDF5D; }
+
+body > div.success {
+  background-color: #952D87; }
+
 /* End download interaction */

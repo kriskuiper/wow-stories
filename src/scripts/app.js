@@ -126,15 +126,26 @@ searchField.addEventListener('input', filterStories);
 
 // Grijp alle downloadbuttons
 var downloadButtons = document.querySelectorAll('#download');
-var succesMelding = document.getElementById('success');
-var errorMelding = document.getElementById('error');
+
+
+var melding = document.querySelector('body > div');
+function showMelding(meldingSoort) {
+    melding.classList.add('show');
+    melding.classList.add(meldingSoort);
+}
+
+function deleteMelding() {
+    setTimeout(function() {
+        melding.classList.remove('show');
+    }, 4000);
+}
 
 // Zorg dat de classlist wordt aangepast op hetgeen de gebruiker klikt
 
 function loadingState() {
     // Bind this to the function so that setTimeout doesn't set it to the window
     var e = this;
-
+    var betreffendeTitel = returnArticle(e).childNodes[1].childNodes[1].textContent; // Titel van het betreffende verhaal voor de melding
     e.classList.add('loading');
     setTimeout(function() {
         // Check internet connectie door een httprequest te doen.
@@ -154,16 +165,22 @@ function loadingState() {
                 if (xhr.status >= 200 && xhr.status < 304) {
                     e.classList.remove('loading');
                     e.classList.add('finished');
-            
+                    melding.classList.remove('error');
+                    showMelding('success');
+                    melding.childNodes[1].textContent = "'" + betreffendeTitel + "'" + " is gedownload op dit apparaat";
                     // Pas de text van de onderliggende li aan naar "Gedownload"
                     e.parentElement.nextElementSibling.textContent = "Gedownload";
+                    deleteMelding();
                 // Als er geen internet is, toon dan de error state
                 } else {
                     e.classList.remove('loading');
                     e.classList.add('error');
-
+                    melding.classList.remove('success');
+                    showMelding('error');
+                    melding.childNodes[1].textContent = "Het downloaden van " + "'" + betreffendeTitel + "'" + " is mislukt.";
                     // Pas de text van de onderliggende li aan naar "Mislukt"
                     e.parentElement.nextElementSibling.textContent = "Mislukt!";
+                    deleteMelding();
                 }
             }
         }
@@ -268,10 +285,11 @@ function surpriseUser() {
     if (!isToggled) {
         firstStoriesTitle.textContent = "Speciaal voor jou:";
         isToggled = true;
-
+        firstSection.classList.toggle('loading');
         setTimeout(function() {
+            firstSection.classList.toggle('loading');
             firstSection.appendChild(getRandomStory());
-        }, 1000);
+        }, 2000);
     } else {
         firstStoriesTitle.textContent = "Chaotisch" + " (" + firstStories.length + ")";
         // Het verhaal wordt weer verwijderd.
