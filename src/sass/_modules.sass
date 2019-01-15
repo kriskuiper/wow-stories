@@ -1,6 +1,6 @@
 /* Sorteer blok styling */
 
-fieldset#sortOptions
+fieldset
     legend 
         margin-bottom: 1.2em
     div
@@ -9,6 +9,7 @@ fieldset#sortOptions
         margin: 0
         position: relative
         label
+            cursor: pointer
             transition: .2s ease
             border: 1px solid $secondary-color
             width: 26%
@@ -18,9 +19,9 @@ fieldset#sortOptions
             &.active
                 background: $secondary-color
                 color: white
-            input
-                position: absolute
-                display: none
+        input[type="radio"]:checked + label
+            background: $secondary-color
+            color: white
         input[type="submit"]
             -webkit-appearance: none
             opacity: 0
@@ -30,6 +31,7 @@ fieldset#sortOptions
             left: 0
             right: 0
             width: 100%
+
 
 /* End sorteer blok styling */
         

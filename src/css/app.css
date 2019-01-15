@@ -98,6 +98,10 @@ body > section:first-of-type {
   body > section:first-of-type > h2 {
     display: none; }
 
+input[type="radio"] {
+  position: absolute;
+  left: -999vw; }
+
 /* Text styles */
 body {
   font-size: 0.8em;
@@ -133,16 +137,15 @@ a {
 form#filter {
   background-color: white;
   position: fixed;
-  top: 4.5rem;
+  top: 93px;
   left: -100vw;
   z-index: 9999;
-  width: 99%;
   bottom: 0;
   padding: 5rem 10%;
-  transition: .6s ease-in; }
+  transition: .5s ease; }
   form#filter.show {
-    left: 6px;
-    right: 6px; }
+    left: .5rem;
+    right: .5rem; }
   form#filter label.lbl-block {
     display: block;
     margin-bottom: 1.3em;
@@ -302,28 +305,29 @@ body > section:first-of-type > ul {
 
 /* End stories block styling */
 /* Sorteer blok styling */
-fieldset#sortOptions legend {
+fieldset legend {
   margin-bottom: 1.2em; }
 
-fieldset#sortOptions div {
+fieldset div {
   display: flex;
   justify-content: space-between;
   margin: 0;
   position: relative; }
-  fieldset#sortOptions div label {
+  fieldset div label {
+    cursor: pointer;
     transition: .2s ease;
     border: 1px solid #952D87;
     width: 26%;
     padding: 1em 2em;
     text-align: center;
     font-size: 1vw; }
-    fieldset#sortOptions div label.active {
+    fieldset div label.active {
       background: #952D87;
       color: white; }
-    fieldset#sortOptions div label input {
-      position: absolute;
-      display: none; }
-  fieldset#sortOptions div input[type="submit"] {
+  fieldset div input[type="radio"]:checked + label {
+    background: #952D87;
+    color: white; }
+  fieldset div input[type="submit"] {
     -webkit-appearance: none;
     opacity: 0;
     position: absolute;
