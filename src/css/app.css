@@ -13,7 +13,8 @@ body {
       border: 0.5em solid #952D87;
       padding: 0 10%; } }
   body.noScroll {
-    overflow: hidden; }
+    overflow: hidden;
+    height: 100vw; }
   body > section {
     margin: 2em 0; }
 
