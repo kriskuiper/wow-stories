@@ -126,6 +126,8 @@ searchField.addEventListener('input', filterStories);
 
 // Grijp alle downloadbuttons
 var downloadButtons = document.querySelectorAll('#download');
+var succesMelding = document.getElementById('success');
+var errorMelding = document.getElementById('error');
 
 // Zorg dat de classlist wordt aangepast op hetgeen de gebruiker klikt
 
@@ -135,11 +137,36 @@ function loadingState() {
 
     e.classList.add('loading');
     setTimeout(function() {
-        e.classList.remove('loading');
-        e.classList.add('finished');
+        // Check internet connectie door een httprequest te doen.
+        // Bron: https://www.kirupa.com/html5/check_if_internet_connection_exists_in_javascript.html
+        var xhr = new XMLHttpRequest();
+        var file = "https://picsum.photos/200/300";
+        var randomNum = Math.round(Math.random() * 10000);
 
-        // Pas de text van de onderliggende li aan naar "Gedownload"
-        e.parentElement.nextElementSibling.textContent = "Gedownload";
+        xhr.open('HEAD', file + "?rand=" + randomNum, true);
+        xhr.send();
+
+        xhr.addEventListener('readystatechange', processRequest, false);
+
+        function processRequest(el) {
+            if (xhr.readyState == 4) {
+                // Als er internet is, toon dan de success state
+                if (xhr.status >= 200 && xhr.status < 304) {
+                    e.classList.remove('loading');
+                    e.classList.add('finished');
+            
+                    // Pas de text van de onderliggende li aan naar "Gedownload"
+                    e.parentElement.nextElementSibling.textContent = "Gedownload";
+                // Als er geen internet is, toon dan de error state
+                } else {
+                    e.classList.remove('loading');
+                    e.classList.add('error');
+
+                    // Pas de text van de onderliggende li aan naar "Mislukt"
+                    e.parentElement.nextElementSibling.textContent = "Mislukt!";
+                }
+            }
+        }
     }, 3600);
 }
 

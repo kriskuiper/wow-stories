@@ -412,6 +412,7 @@ header:first-child > section {
       margin: .25em auto; }
 
 /* End zero state block */
+/* Styles for download interaction */
 @keyframes loading {
   0% {
     transform: rotate(0deg); }
@@ -422,6 +423,7 @@ button#download {
   transition: .4s; }
 
 button#download.loading {
+  background-color: transparent;
   background-image: none !important;
   animation-name: loading;
   animation-duration: 2s;
@@ -433,5 +435,17 @@ button#download.loading {
   border-left-color: #952D87;
   border-bottom-color: #952D87; }
 
+button#download.error {
+  background-image: url("../images/error2.svg") !important;
+  background-size: 30%;
+  background-position: center;
+  background-color: #FFDF5D;
+  border-radius: 50%;
+  padding: 1.2em; }
+
 button#download.finished {
+  background-color: transparent;
   background-image: url("../images/downloaded.svg") !important; }
+
+/* Pop up's when download did or did not succeed */
+/* End download interaction */
