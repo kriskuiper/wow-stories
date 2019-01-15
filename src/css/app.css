@@ -140,7 +140,7 @@ form#filter {
   background-color: white;
   position: fixed;
   top: 93px;
-  left: -100vw;
+  left: -140vw;
   z-index: 9999;
   bottom: 0;
   padding: 5rem 10%;
@@ -314,15 +314,21 @@ fieldset div {
   display: flex;
   justify-content: space-between;
   margin: 0;
+  max-width: 100%;
   position: relative; }
   fieldset div label {
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: .2s ease;
     border: 1px solid #952D87;
     width: 26%;
     padding: 1em 2em;
-    text-align: center;
-    font-size: 1vw; }
+    font-size: .8em; }
+    @media screen and (min-width: 60em) {
+      fieldset div label {
+        font-size: 1em; } }
     fieldset div label.active {
       background: #952D87;
       color: white; }
