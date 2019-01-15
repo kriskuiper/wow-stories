@@ -531,6 +531,7 @@ body > div.error {
   background-color: #FFDF5D; }
 
 body > div.success {
+  color: white;
   background-color: #952D87; }
 
 /* End download interaction */
