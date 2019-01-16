@@ -67,10 +67,34 @@ function returnArticle(grandParent) {
     return article;
 }
 
-// Verkrijg alle verhalentitels uit de website
-function getTitles(titles) {
-    titles = document.querySelectorAll('.stories article h4');
-    return titles;
+// Verkrijg alle verhalen
+var allTitles = document.querySelectorAll('.stories article h4');
+
+// Check welke verhalen er nog zichtbaar zijn
+function checkAmountOfVisibleTitles() {
+    var visibleTitles = [];
+
+    for (var i = 0; i < allTitles.length; i++) {
+        if (!returnArticle(allTitles[i]).classList.contains('visually-hidden')) {
+            visibleTitles.push(allTitles[i]);
+        }
+    }
+
+    return visibleTitles.length;
+}
+
+// Check welke verhalen er nog zichtbaar zijn per genre
+function checkVisibleTitlesPerGenre(genre) {
+    var storiesInGenre = document.getElementsByClassName(genre);
+    var visibleTitlesInGenre = [];
+
+    for (var i = 0; i < storiesInGenre.length; i++) {
+        if (!returnArticle(storiesInGenre[i]).classList.contains('visually-hidden')) {
+            visibleTitlesInGenre.push(visibleTitlesInGenre[i]);
+        }
+    }
+
+    return visibleTitlesInGenre.length;
 }
 
 // Verkrijg de p die het aantal resultaten weergeeft
@@ -88,52 +112,76 @@ function fixInput() {
     // Filter stories on the searchField value, in this case droom
     filterStories();
 }
-// Tag de resultaten met een class zodat er bijgehouden kan worden hoeveel resultaten er zijn
-var resultItems = document.getElementsByClassName('result');
 
 // Filter de verhalen
 function filterStories() {
     checkUserInput();
-    getTitles();
-
-    var input = checkUserInput();
-    var titles = getTitles();
+    checkAmountOfVisibleTitles();
     
-
+    var input = checkUserInput();
+    var visibleTitles = checkAmountOfVisibleTitles();
     // Wanneer de titel gelijk is aan de input of er geen input is, toon dan elk verhaal
-    titles.forEach(function(title) {
+    if (input === "") {
+        visibleTitles = 15;
+        // Als er totaal geen input is, doe dan dit:
+        if (results) {
+            results.classList.add('visually-hidden');
+        }
+        if (visibleTitles === 15) {
+            allTitles.forEach(function(title) {
+                returnArticle(title).classList.remove('visually-hidden');
+            });
+        }
+    } else if (input && visibleTitles <= 15 && visibleTitles >= 1) {
         if (results) {
             results.classList.remove('visually-hidden');
-            results.textContent = resultItems.length + " verhalen gevonden."
+            results.textContent =  visibleTitles + " verhalen gevonden.";
         }
-        if (input === "") {
-            results.classList.add('visually-hidden');
-            if (fallBackButton) {
-                fallBackButton.classList.add('visually-hidden');
+        allTitles.forEach(function(title) {
+            if (title.textContent.toLowerCase().includes(input.toLowerCase())) {
+                returnArticle(title).classList.remove('visually-hidden');
+            } else {
+                returnArticle(title).classList.add('visually-hidden');
             }
-            returnArticle(title).classList.remove('visually-hidden');
-
-        } else if (title.textContent.toLowerCase().includes(input.toLowerCase())) {
-            returnArticle(title).classList.remove('visually-hidden');
-            returnArticle(title).classList.add('result');
-            if (fallBackButton) {
-                fallBackButton.classList.add('visually-hidden');
-            }
-
-        } else if (!title.textContent.toLowerCase().includes(input.toLowerCase())) {
-            returnArticle(title).classList.add('visually-hidden');
-            returnArticle(title).classList.remove('result');
-            if (fallBackButton) {
-                fallBackButton.classList.remove('visually-hidden');
-            }
-            if (results) {
-                results.textContent = "Oeps, we hebben geen resultaten kunnen vinden voor " + input + ", bedoelde je misschien 'Droom'?"
-            }
+        });
+    } else {
+        if (results) {
+            results.textContent = "Oeps, we hebben geen resultaten kunnen vinden voor " + input + ", bedoelde je misschien 'Droom'?"
         }
+    }
+
+    allTitles.forEach(function(title) {
+        // if (results) {
+        //     results.classList.remove('visually-hidden');
+        //     results.textContent = checkAmountOfVisibleTitles() + " verhalen gevonden."
+        // }
+        // if (input === "" && checkAmountOfVisibleTitles() === allTitles.length) {
+        //     results.classList.add('visually-hidden');
+        //     if (fallBackButton) {
+        //         fallBackButton.classList.add('visually-hidden');
+        //     }
+        //     returnArticle(title).classList.remove('visually-hidden');
+
+        // } else if (title.textContent.toLowerCase().includes(input.toLowerCase())) {
+        //     returnArticle(title).classList.remove('visually-hidden');
+        //     returnArticle(title).classList.add('result');
+        //     if (fallBackButton) {
+        //         fallBackButton.classList.add('visually-hidden');
+        //     }
+
+        // } else if (!title.textContent.toLowerCase().includes(input.toLowerCase()) && checkAmountOfVisibleTitles() === 0) {
+        //     returnArticle(title).classList.add('visually-hidden');
+        //     returnArticle(title).classList.remove('result');
+        //     if (fallBackButton) {
+        //         fallBackButton.classList.remove('visually-hidden');
+        //     }
+            
+        // }
     });
 }
 
 searchField.addEventListener('input', filterStories);
+searchField.addEventListener('delete', filterStories);
 // Einde verhalenfilter
 
 // Download animation
@@ -220,14 +268,6 @@ var secondStoriesTitle = document.querySelector('#humorTitle');
 var thirdStoriesTitle = document.querySelector('#horrorTitle');
 var fourthStoriesTitle = document.querySelector('#liefdeTitle');
 
-// Set all titles in an array for later purposes
-var allGenreTitles = [
-    firstStoriesTitle,
-    secondStoriesTitle,
-    thirdStoriesTitle,
-    fourthStoriesTitle
-]
-
 // Set the initial state of the titles
 if (firstStoriesTitle) {
     firstStoriesTitle.textContent = "Chaotisch" + " (" + firstStories.length + ")";
@@ -247,28 +287,28 @@ if (fourthStoriesTitle) {
 
 // Change the number of results
 // Function that takes all vars of every story as arguments
-function storyChecker(listOfStories, updatedStoryList, storiesTitleElement, titleName) {
-    updatedStoryList = [];
+// function storyChecker(listOfStories, updatedStoryList, storiesTitleElement, titleName) {
+//     updatedStoryList = [];
 
-    // Check if the list of stories exists in the page
-    if (listOfStories) {
-        listOfStories.forEach(function(story) {
-            if (story.classList.contains('result')) {
-                updatedStoryList.push(story);
-                storiesTitleElement.textContent = titleName + " (" + updatedStoryList.length + ")";
-            }
-        });
-    }   
-}
+//     // Check if the list of stories exists in the page
+//     if (listOfStories) {
+//         listOfStories.forEach(function(story) {
+//             if (story.classList.contains('result')) {
+//                 updatedStoryList.push(story);
+//                 storiesTitleElement.textContent = titleName + " (" + updatedStoryList.length + ")";
+//             }
+//         });
+//     }   
+// }
 
-function checkStories() {
-    storyChecker(firstStories, [], firstStoriesTitle, "Chaotisch");
-    storyChecker(secondStories, [], secondStoriesTitle, "Humor");
-    storyChecker(thirdStories, [], thirdStoriesTitle, "Horror");
-    storyChecker(fourthStories, [], fourthStoriesTitle, "Liefde");    
-}
+// function checkStories() {
+//     storyChecker(firstStories, [], firstStoriesTitle, "Chaotisch");
+//     storyChecker(secondStories, [], secondStoriesTitle, "Humor");
+//     storyChecker(thirdStories, [], thirdStoriesTitle, "Horror");
+//     storyChecker(fourthStories, [], fourthStoriesTitle, "Liefde");    
+// }
 
-searchField.addEventListener('input', checkStories);
+// searchField.addEventListener('input', checkStories);
 
 // Verras me flow
 var submitInput = document.querySelector('#sortOptions input[type="submit"]');
