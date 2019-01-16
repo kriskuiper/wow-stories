@@ -80,6 +80,19 @@ header > nav ul
             & > span:first-child.is-open
                 transform: rotate(45deg)
                 transform-origin: top left
+    li:first-child
+        position: relative
+        & > ::after
+            content: "Filter"
+            font-size: 1.2em
+            text-transform: uppercase
+            position: absolute
+            color: $dark
+            display: flex
+            align-items: center
+            top: 0
+            bottom: 0
+            left: 3em
     li:last-child
         img
             width: 3.2em

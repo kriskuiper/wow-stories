@@ -81,6 +81,19 @@ header > nav ul {
       header > nav ul li > button > span:first-child.is-open {
         transform: rotate(45deg);
         transform-origin: top left; }
+  header > nav ul li:first-child {
+    position: relative; }
+    header > nav ul li:first-child > ::after {
+      content: "Filter";
+      font-size: 1.2em;
+      text-transform: uppercase;
+      position: absolute;
+      color: #2B4040;
+      display: flex;
+      align-items: center;
+      top: 0;
+      bottom: 0;
+      left: 3em; }
   header > nav ul li:last-child img {
     width: 3.2em; }
 
@@ -106,6 +119,11 @@ input[type="radio"] {
 
 /* Text styles */
 /* Museo sans import */
+/* Uneasy import */
+@font-face {
+  font-family: "Uneasy";
+  src: url("../fonts/uneasy.ttf"); }
+
 body {
   font-size: 0.8em;
   font-weight: 300;
@@ -326,6 +344,90 @@ body > section:first-of-type > ul {
             border-top: 4px solid #FFDF5D; }
 
 /* End stories block styling */
+/* Responsive story styling */
+@keyframes pop {
+  0% {
+    opacity: 0;
+    transform: translateY(0); }
+  50% {
+    opacity: 1;
+    transform: translateY(-5em); }
+  100% {
+    opacity: 0;
+    transform: translateY(0); } }
+
+body#gefrustreerd {
+  padding: 0;
+  border: 0;
+  font-family: Helvetica, sans-serif;
+  font-style: italic;
+  color: #2c2c2c;
+  font-size: 1rem; }
+  body#gefrustreerd header {
+    padding: 0 10%; }
+  body#gefrustreerd article {
+    text-align: center; }
+    body#gefrustreerd article h1 {
+      font-family: 'Uneasy';
+      font-size: 10vw;
+      margin: .2em 0; }
+    body#gefrustreerd article h2 {
+      display: none; }
+    body#gefrustreerd article p {
+      max-width: 50em;
+      margin: 0 auto; }
+    body#gefrustreerd article span {
+      font-family: 'Uneasy';
+      font-size: 1.5em; }
+    body#gefrustreerd article > section {
+      padding: 2em 1em; }
+    body#gefrustreerd article > section:nth-child(even) {
+      background: #2c2c2c;
+      color: white; }
+  body#gefrustreerd footer {
+    height: 100%; }
+    body#gefrustreerd footer > button {
+      position: fixed;
+      background: #952D87;
+      background-image: url("../images/like.svg");
+      background-repeat: no-repeat;
+      background-size: 55%;
+      background-position: center;
+      border-radius: 100%;
+      height: 4rem;
+      width: 4rem;
+      position: fixed;
+      right: 13%;
+      bottom: 1.5%;
+      opacity: 1;
+      z-index: 9999;
+      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+      transition: all .5s ease; }
+      body#gefrustreerd footer > button::after {
+        background: #952D87;
+        display: flex;
+        color: white;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        content: "+1";
+        position: absolute;
+        height: 3em;
+        width: 3em;
+        top: 50%;
+        left: 50%;
+        margin-top: -1.5em;
+        margin-left: -1.5em;
+        opacity: 0; }
+    body#gefrustreerd footer > button.is-liked {
+      background-image: url("../images/like-filled.svg"); }
+      body#gefrustreerd footer > button.is-liked::after {
+        animation-name: pop;
+        animation-direction: alternate;
+        animation-duration: 2s;
+        animation-iteration-count: 1; }
+
+/* End responsive story styling */
 /* Sorteer blok styling */
 fieldset legend {
   margin-bottom: 1.2em; }
@@ -421,7 +523,7 @@ form#story-search {
 /* Zero state block */
 header:first-child > section {
   position: relative;
-  background: url("../../images/zero-state_background.max.jpg");
+  background: url("../../images/zero-state_background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

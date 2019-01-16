@@ -202,7 +202,88 @@ body > section:first-of-type > ul
 
 /* End stories block styling */
 
+/* Responsive story styling */
+@keyframes pop
+    0%
+        opacity: 0
+        transform: translateY(0)
+    50%
+        opacity: 1
+        transform: translateY(-5em)
+    100%
+        opacity: 0
+        transform: translateY(0)
 
-                    
+body#gefrustreerd
+    padding: 0
+    border: 0
+    font-family: Helvetica, sans-serif
+    font-style: italic
+    color: $story-dark
+    font-size: 1rem
+    header
+        padding: 0 10%
+    article
+        text-align: center
+        h1
+            font-family: 'Uneasy'
+            font-size: 10vw
+            margin: .2em 0
+        h2
+            display: none
+        p
+            max-width: 50em
+            margin: 0 auto
+        span
+            font-family: 'Uneasy'
+            font-size: 1.5em
+        & > section
+            padding: 2em 1em
+        & > section:nth-child(even)
+            background: $story-dark
+            color: white
+    footer
+        height: 100% 
+        & > button
+            position: fixed
+            background: $secondary-color
+            background-image: url('../images/like.svg')
+            background-repeat: no-repeat
+            background-size: 55%
+            background-position: center
+            border-radius: 100%
+            height: 4rem
+            width: 4rem
+            position: fixed
+            right: 13%
+            bottom: 1.5%
+            opacity: 1
+            z-index: 9999
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, .2)
+            transition: all .5s ease
+            &::after
+                background: $secondary-color
+                display: flex
+                color: white
+                align-items: center
+                justify-content: center
+                border-radius: 50%
+                content: "+1"
+                position: absolute
+                height: 3em
+                width: 3em
+                top: 50%
+                left: 50%
+                margin-top: -1.5em
+                margin-left: -1.5em
+                opacity: 0
+        & > button.is-liked
+                background-image: url('../images/like-filled.svg')
+                &::after
+                    animation-name: pop
+                    animation-direction: alternate
+                    animation-duration: 2s
+                    animation-iteration-count: 1
+/* End responsive story styling */                
 
     
