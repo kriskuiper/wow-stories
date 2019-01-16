@@ -23,5 +23,6 @@ function likeVerhaal() {
     var isLiked = true;
     likeButton.classList.toggle('is-liked');
 }
-
+ 
 // Einde verhaal liken animatie
+

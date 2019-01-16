@@ -22,6 +22,9 @@ ul {
   list-style: none;
   padding: 0; }
 
+form:nth-of-type(2) {
+  margin-top: 4em; }
+
 button {
   cursor: pointer;
   border: none;
@@ -108,9 +111,9 @@ header > nav ul {
 
 /* End generic styles */
 /* Resultaten section */
-body > section:first-of-type {
+body > section#resultsSection {
   text-align: center; }
-  body > section:first-of-type > h2 {
+  body > section#resultsSection > h2 {
     display: none; }
 
 input[type="radio"] {
@@ -243,7 +246,7 @@ body > section:first-of-type > ul {
     font-size: .8em;
     margin-right: .5em;
     padding: 1em 2em;
-    color: white;
+    color: #2B4040;
     font-weight: 300;
     border-radius: 3px;
     background: #FFDF5D; }
@@ -609,7 +612,7 @@ button#download.loading {
   background-image: none !important;
   animation-name: loading;
   animation-duration: 2s;
-  animation-iteration-count: 3;
+  animation-iteration-count: infinite;
   animation-fill-mode: forwards;
   border-radius: 50%;
   border: 6px solid;
@@ -636,6 +639,7 @@ body > div {
   color: #2B4040;
   position: fixed;
   font-size: 1.2em;
+  font-weight: 900;
   z-index: 999;
   right: 0;
   left: 0;

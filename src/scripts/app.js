@@ -74,11 +74,13 @@ function getTitles(titles) {
 }
 
 // Verkrijg de p die het aantal resultaten weergeeft
-var results = document.querySelector('body > section:first-of-type > p');
-var resultsSection = document.querySelector('body > section:first-of-type');
-var fallBackButton = document.querySelector('body > section:first-of-type > button');
+var results = document.querySelector('#results');
+var resultsSection = document.querySelector('#resultsSection');
+var fallBackButton = document.querySelector('#fallBackButton');
 
-fallBackButton.addEventListener('click', fixInput);
+if (fallBackButton) {
+    fallBackButton.addEventListener('click', fixInput);
+}
 
 function fixInput() {
     // Verander de input naar 'droom'.
@@ -86,7 +88,6 @@ function fixInput() {
     // Filter stories on the searchField value, in this case droom
     filterStories();
 }
-
 // Tag de resultaten met een class zodat er bijgehouden kan worden hoeveel resultaten er zijn
 var resultItems = document.getElementsByClassName('result');
 
@@ -101,23 +102,33 @@ function filterStories() {
 
     // Wanneer de titel gelijk is aan de input of er geen input is, toon dan elk verhaal
     titles.forEach(function(title) {
-        results.classList.remove('visually-hidden');
-        results.textContent = resultItems.length + " verhalen gevonden."
+        if (results) {
+            results.classList.remove('visually-hidden');
+            results.textContent = resultItems.length + " verhalen gevonden."
+        }
         if (input === "") {
             results.classList.add('visually-hidden');
-            fallBackButton.classList.add('visually-hidden');
+            if (fallBackButton) {
+                fallBackButton.classList.add('visually-hidden');
+            }
             returnArticle(title).classList.remove('visually-hidden');
 
         } else if (title.textContent.toLowerCase().includes(input.toLowerCase())) {
             returnArticle(title).classList.remove('visually-hidden');
             returnArticle(title).classList.add('result');
-            fallBackButton.classList.add('visually-hidden');
+            if (fallBackButton) {
+                fallBackButton.classList.add('visually-hidden');
+            }
 
         } else if (!title.textContent.toLowerCase().includes(input.toLowerCase())) {
             returnArticle(title).classList.add('visually-hidden');
             returnArticle(title).classList.remove('result');
-            fallBackButton.classList.remove('visually-hidden');
-            results.textContent = "Oeps, we hebben geen resultaten kunnen vinden voor " + input + ", bedoelde je misschien 'Droom'?"
+            if (fallBackButton) {
+                fallBackButton.classList.remove('visually-hidden');
+            }
+            if (results) {
+                results.textContent = "Oeps, we hebben geen resultaten kunnen vinden voor " + input + ", bedoelde je misschien 'Droom'?"
+            }
         }
     });
 }
@@ -128,7 +139,7 @@ searchField.addEventListener('input', filterStories);
 // Download animation
 
 // Grijp alle downloadbuttons
-var downloadButtons = document.querySelectorAll('#download');
+var downloadButtons = document.querySelectorAll('button#download');
 
 
 var melding = document.querySelector('body > div');
@@ -204,10 +215,10 @@ var secondStories = document.querySelectorAll('body > section:nth-of-type(3) > s
 var thirdStories = document.querySelectorAll('body > section:nth-of-type(4) > section > article');
 var fourthStories = document.querySelectorAll('body > section:nth-of-type(5) > section > article');
 
-var firstStoriesTitle = document.querySelector('body > section:nth-of-type(2) > h2');
-var secondStoriesTitle = document.querySelector('body > section:nth-of-type(3) > h2');
-var thirdStoriesTitle = document.querySelector('body > section:nth-of-type(4) > h2');
-var fourthStoriesTitle = document.querySelector('body > section:nth-of-type(5) > h2');
+var firstStoriesTitle = document.querySelector('#chaotischTitle');
+var secondStoriesTitle = document.querySelector('#humorTitle');
+var thirdStoriesTitle = document.querySelector('#horrorTitle');
+var fourthStoriesTitle = document.querySelector('#liefdeTitle');
 
 // Set all titles in an array for later purposes
 var allGenreTitles = [
@@ -218,22 +229,36 @@ var allGenreTitles = [
 ]
 
 // Set the initial state of the titles
-firstStoriesTitle.textContent = "Chaotisch" + "(26)";
-secondStoriesTitle.textContent = "Humor" + " (34)";
-thirdStoriesTitle.textContent = "Horror" + " (13)";
-fourthStoriesTitle.textContent = "Liefde" + " (24)";
+if (firstStoriesTitle) {
+    firstStoriesTitle.textContent = "Chaotisch" + " (" + firstStories.length + ")";
+}
+
+if (secondStoriesTitle) {
+    secondStoriesTitle.textContent = "Humor" + " (" + secondStories.length + ")";
+}
+
+if (thirdStoriesTitle) {
+    thirdStoriesTitle.textContent = "Horror" + " (" + thirdStories.length + ")";
+}
+
+if (fourthStoriesTitle) {
+    fourthStoriesTitle.textContent = "Liefde" + " (" + fourthStories.length + ")";
+}
 
 // Change the number of results
 // Function that takes all vars of every story as arguments
 function storyChecker(listOfStories, updatedStoryList, storiesTitleElement, titleName) {
     updatedStoryList = [];
 
-    listOfStories.forEach(function(story) {
-        if (story.classList.contains('result')) {
-            updatedStoryList.push(story);
-            storiesTitleElement.textContent = titleName + " (" + updatedStoryList.length + ")";
-        }
-    });
+    // Check if the list of stories exists in the page
+    if (listOfStories) {
+        listOfStories.forEach(function(story) {
+            if (story.classList.contains('result')) {
+                updatedStoryList.push(story);
+                storiesTitleElement.textContent = titleName + " (" + updatedStoryList.length + ")";
+            }
+        });
+    }   
 }
 
 function checkStories() {
@@ -259,7 +284,7 @@ var fourthSection = sections[3];
 var allStories = document.querySelectorAll('.stories article');
 
 function getRandomStory() {
-    var randomNumber = Math.round(Math.random() * allStories.length);
+    var randomNumber = Math.round(Math.random() * allStories.length-1);
     var randomStory = allStories[randomNumber];
     var clonedStory = randomStory.cloneNode(true);
 
@@ -304,3 +329,6 @@ function surpriseUser() {
 }
 
 submitInput.addEventListener('click', surpriseUser);
+
+// End verras me flow
+
