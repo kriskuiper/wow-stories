@@ -89,12 +89,17 @@ function checkVisibleTitlesPerGenre(genre) {
     var visibleTitlesInGenre = [];
 
     for (var i = 0; i < storiesInGenre.length; i++) {
-        if (!returnArticle(storiesInGenre[i]).classList.contains('visually-hidden')) {
-            visibleTitlesInGenre.push(visibleTitlesInGenre[i]);
+        if (!storiesInGenre[i].classList.contains('visually-hidden')) {
+            visibleTitlesInGenre.push(storiesInGenre[i]);
         }
     }
 
     return visibleTitlesInGenre.length;
+}
+
+function getAllStoriesInGenre(genre) {
+    var allStories = document.getElementsByClassName(genre);
+    return allStories.length;
 }
 
 // Verkrijg de p die het aantal resultaten weergeeft
@@ -113,19 +118,50 @@ function fixInput() {
     filterStories();
 }
 
+
+var firstStoriesTitle = document.querySelector('#chaotischTitle');
+var secondStoriesTitle = document.querySelector('#humorTitle');
+var thirdStoriesTitle = document.querySelector('#horrorTitle');
+var fourthStoriesTitle = document.querySelector('#liefdeTitle');
+
+firstStoriesTitle.textContent = "Chaotisch (" + getAllStoriesInGenre('chaotischVerhaal') + ")";
+secondStoriesTitle.textContent = "Humor (" + getAllStoriesInGenre('humorVerhaal') + ")";
+thirdStoriesTitle.textContent = "Horror (" + getAllStoriesInGenre('horrorVerhaal') + ")";
+fourthStoriesTitle.textContent = "Liefde (" + getAllStoriesInGenre('liefdeVerhaal') + ")";
+
 // Filter de verhalen
 function filterStories() {
     checkUserInput();
     checkAmountOfVisibleTitles();
-    
+    checkVisibleTitlesPerGenre('chaotischVerhaal');
+    checkVisibleTitlesPerGenre('humorVerhaal');
+    checkVisibleTitlesPerGenre('horrorVerhaal');
+    checkVisibleTitlesPerGenre('liefdeVerhaal');
+
     var input = checkUserInput();
     var visibleTitles = checkAmountOfVisibleTitles();
-    // Wanneer de titel gelijk is aan de input of er geen input is, toon dan elk verhaal
+
+    var visibleChaotisch = checkVisibleTitlesPerGenre('chaotischVerhaal');
+    var visibleHumor = checkVisibleTitlesPerGenre('humorVerhaal');
+    var visibleHorror = checkVisibleTitlesPerGenre('horrorVerhaal');
+    var visibleLiefde = checkVisibleTitlesPerGenre('liefdeVerhaal');
+        
+    firstStoriesTitle.textContent = "Chaotisch (" + visibleChaotisch + ")";
+    secondStoriesTitle.textContent = "Humor (" + visibleHumor + ")";
+    thirdStoriesTitle.textContent = "Horror (" + visibleHorror + ")";
+    fourthStoriesTitle.textContent = "Liefde (" + visibleLiefde + ")";
+
     if (input === "") {
-        visibleTitles = 15;
         // Als er totaal geen input is, doe dan dit:
-        if (results) {
+        visibleTitles = 15;
+        visibleChaotisch = getAllStoriesInGenre('chaotischVerhaal');
+        visibleHumor = getAllStoriesInGenre('humorVerhaal');
+        visibleHorror = getAllStoriesInGenre('horrorVerhaal');
+        visibleLiefde = getAllStoriesInGenre('liefdeVerhaal');
+
+        if (results && fallBackButton) {
             results.classList.add('visually-hidden');
+            fallBackButton.classList.add('visually-hidden');
         }
         if (visibleTitles === 15) {
             allTitles.forEach(function(title) {
@@ -133,9 +169,11 @@ function filterStories() {
             });
         }
     } else if (input && visibleTitles <= 15 && visibleTitles >= 1) {
+
         if (results) {
             results.classList.remove('visually-hidden');
             results.textContent =  visibleTitles + " verhalen gevonden.";
+
         }
         allTitles.forEach(function(title) {
             if (title.textContent.toLowerCase().includes(input.toLowerCase())) {
@@ -145,43 +183,23 @@ function filterStories() {
             }
         });
     } else {
-        if (results) {
-            results.textContent = "Oeps, we hebben geen resultaten kunnen vinden voor " + input + ", bedoelde je misschien 'Droom'?"
+
+        if (results && fallBackButton) {
+            results.textContent = "Oeps, we hebben geen resultaten kunnen vinden voor " + input + ", bedoelde je misschien 'Droom'?";
+            fallBackButton.classList.remove('visually-hidden');
+            fallBackButton.addEventListener('click', fixInput);
         }
+
+        visibleChaotisch = 0;
+        visibleHumor = 0;
+        visibleHorror = 0;
+        visibleLiefde = 0;
     }
-
-    allTitles.forEach(function(title) {
-        // if (results) {
-        //     results.classList.remove('visually-hidden');
-        //     results.textContent = checkAmountOfVisibleTitles() + " verhalen gevonden."
-        // }
-        // if (input === "" && checkAmountOfVisibleTitles() === allTitles.length) {
-        //     results.classList.add('visually-hidden');
-        //     if (fallBackButton) {
-        //         fallBackButton.classList.add('visually-hidden');
-        //     }
-        //     returnArticle(title).classList.remove('visually-hidden');
-
-        // } else if (title.textContent.toLowerCase().includes(input.toLowerCase())) {
-        //     returnArticle(title).classList.remove('visually-hidden');
-        //     returnArticle(title).classList.add('result');
-        //     if (fallBackButton) {
-        //         fallBackButton.classList.add('visually-hidden');
-        //     }
-
-        // } else if (!title.textContent.toLowerCase().includes(input.toLowerCase()) && checkAmountOfVisibleTitles() === 0) {
-        //     returnArticle(title).classList.add('visually-hidden');
-        //     returnArticle(title).classList.remove('result');
-        //     if (fallBackButton) {
-        //         fallBackButton.classList.remove('visually-hidden');
-        //     }
-            
-        // }
-    });
 }
 
 searchField.addEventListener('input', filterStories);
-searchField.addEventListener('delete', filterStories);
+searchField.addEventListener('keydown', filterStories);
+searchField.addEventListener('keyup', filterStories);
 // Einde verhalenfilter
 
 // Download animation
@@ -256,60 +274,6 @@ for (i = 0; i < downloadButtons.length; i++) {
 
 // End download animation
 
-// Change the number of the results at each Genre
-// Get all titles
-var firstStories = document.querySelectorAll('body > section:nth-of-type(2) > section > article');
-var secondStories = document.querySelectorAll('body > section:nth-of-type(3) > section > article');
-var thirdStories = document.querySelectorAll('body > section:nth-of-type(4) > section > article');
-var fourthStories = document.querySelectorAll('body > section:nth-of-type(5) > section > article');
-
-var firstStoriesTitle = document.querySelector('#chaotischTitle');
-var secondStoriesTitle = document.querySelector('#humorTitle');
-var thirdStoriesTitle = document.querySelector('#horrorTitle');
-var fourthStoriesTitle = document.querySelector('#liefdeTitle');
-
-// Set the initial state of the titles
-if (firstStoriesTitle) {
-    firstStoriesTitle.textContent = "Chaotisch" + " (" + firstStories.length + ")";
-}
-
-if (secondStoriesTitle) {
-    secondStoriesTitle.textContent = "Humor" + " (" + secondStories.length + ")";
-}
-
-if (thirdStoriesTitle) {
-    thirdStoriesTitle.textContent = "Horror" + " (" + thirdStories.length + ")";
-}
-
-if (fourthStoriesTitle) {
-    fourthStoriesTitle.textContent = "Liefde" + " (" + fourthStories.length + ")";
-}
-
-// Change the number of results
-// Function that takes all vars of every story as arguments
-// function storyChecker(listOfStories, updatedStoryList, storiesTitleElement, titleName) {
-//     updatedStoryList = [];
-
-//     // Check if the list of stories exists in the page
-//     if (listOfStories) {
-//         listOfStories.forEach(function(story) {
-//             if (story.classList.contains('result')) {
-//                 updatedStoryList.push(story);
-//                 storiesTitleElement.textContent = titleName + " (" + updatedStoryList.length + ")";
-//             }
-//         });
-//     }   
-// }
-
-// function checkStories() {
-//     storyChecker(firstStories, [], firstStoriesTitle, "Chaotisch");
-//     storyChecker(secondStories, [], secondStoriesTitle, "Humor");
-//     storyChecker(thirdStories, [], thirdStoriesTitle, "Horror");
-//     storyChecker(fourthStories, [], fourthStoriesTitle, "Liefde");    
-// }
-
-// searchField.addEventListener('input', checkStories);
-
 // Verras me flow
 var submitInput = document.querySelector('#sortOptions input[type="submit"]');
 var genreButton = document.querySelector('#sortOptions label');
@@ -322,11 +286,14 @@ var thirdSection = sections[2];
 var fourthSection = sections[3];
 
 var allStories = document.querySelectorAll('.stories article');
+var firstStories = document.querySelectorAll('.stories:first-of-type article');
 
 function getRandomStory() {
     var randomNumber = Math.round(Math.random() * allStories.length-1);
     var randomStory = allStories[randomNumber];
     var clonedStory = randomStory.cloneNode(true);
+    clonedStory.classList.remove('chaotischVerhaal');
+    clonedStory.classList.remove('visually-hidden');
 
     return clonedStory;
 }
@@ -359,7 +326,7 @@ function surpriseUser() {
             firstSection.appendChild(getRandomStory());
         }, 2000);
     } else {
-        firstStoriesTitle.textContent = "Chaotisch" + " (" + firstStories.length + ")";
+        firstStoriesTitle.textContent = "Chaotisch (" + getAllStoriesInGenre('chaotischVerhaal') + ")";
         // Het verhaal wordt weer verwijderd.
         firstSection.removeChild(generatedStory);
         isToggled = false;
