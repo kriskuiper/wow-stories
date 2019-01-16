@@ -127,7 +127,7 @@ input[type="radio"] {
 body {
   font-size: 0.8em;
   font-weight: 300;
-  font-family: museo-sans;
+  font-family: museo-sans, sans-serif;
   color: #2B4040; }
 
 h1,
@@ -356,6 +356,18 @@ body > section:first-of-type > ul {
     opacity: 0;
     transform: translateY(0); } }
 
+@keyframes agressiveWobble {
+  from {
+    transform: skew(0deg); }
+  to {
+    transform: skew(-45deg); } }
+
+@keyframes scaleUp {
+  from {
+    transform: scale(1); }
+  to {
+    transform: scale(1.2); } }
+
 body#gefrustreerd {
   padding: 0;
   border: 0;
@@ -370,7 +382,12 @@ body#gefrustreerd {
     body#gefrustreerd article h1 {
       font-family: 'Uneasy';
       font-size: 10vw;
-      margin: .2em 0; }
+      margin: 1em 0;
+      animation-name: agressiveWobble;
+      animation-duration: .1s;
+      animation-iteration-count: infinite; }
+      body#gefrustreerd article h1:hover {
+        animation: none; }
     body#gefrustreerd article h2 {
       display: none; }
     body#gefrustreerd article p {
@@ -422,9 +439,11 @@ body#gefrustreerd {
     body#gefrustreerd footer > button.is-liked {
       background-image: url("../images/like-filled.svg"); }
       body#gefrustreerd footer > button.is-liked::after {
+        content: "+1";
         animation-name: pop;
         animation-direction: alternate;
-        animation-duration: 2s;
+        animation-timing-function: ease-out;
+        animation-duration: 1.5s;
         animation-iteration-count: 1; }
 
 /* End responsive story styling */

@@ -22,10 +22,6 @@ likeButton.addEventListener('click', likeVerhaal);
 function likeVerhaal() {
     var isLiked = true;
     likeButton.classList.toggle('is-liked');
-
-    if (isLiked) {
-        likeButton.removeEventListener('click', likeVerhaal);
-    }
 }
 
 // Einde verhaal liken animatie

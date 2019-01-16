@@ -108,12 +108,12 @@ function filterStories() {
             fallBackButton.classList.add('visually-hidden');
             returnArticle(title).classList.remove('visually-hidden');
 
-        } else if (input === "" || title.textContent.toLowerCase().includes(input.toLowerCase())) {
+        } else if (title.textContent.toLowerCase().includes(input.toLowerCase())) {
             returnArticle(title).classList.remove('visually-hidden');
             returnArticle(title).classList.add('result');
             fallBackButton.classList.add('visually-hidden');
 
-        } else if (input && !title.textContent.toLowerCase().includes(input.toLowerCase())) {
+        } else if (!title.textContent.toLowerCase().includes(input.toLowerCase())) {
             returnArticle(title).classList.add('visually-hidden');
             returnArticle(title).classList.remove('result');
             fallBackButton.classList.remove('visually-hidden');
@@ -218,10 +218,10 @@ var allGenreTitles = [
 ]
 
 // Set the initial state of the titles
-firstStoriesTitle.textContent = "Chaotisch" + " (" + firstStories.length + ")";
-secondStoriesTitle.textContent = "Humor" + " (" + secondStories.length + ")";
-thirdStoriesTitle.textContent = "Horror" + " (" + thirdStories.length + ")";
-fourthStoriesTitle.textContent = "Liefde" + " (" + fourthStories.length + ")";
+firstStoriesTitle.textContent = "Chaotisch" + "(26)";
+secondStoriesTitle.textContent = "Humor" + " (34)";
+thirdStoriesTitle.textContent = "Horror" + " (13)";
+fourthStoriesTitle.textContent = "Liefde" + " (24)";
 
 // Change the number of results
 // Function that takes all vars of every story as arguments
@@ -259,7 +259,7 @@ var fourthSection = sections[3];
 var allStories = document.querySelectorAll('.stories article');
 
 function getRandomStory() {
-    var randomNumber = Math.floor(Math.random() * allStories.length);
+    var randomNumber = Math.round(Math.random() * allStories.length);
     var randomStory = allStories[randomNumber];
     var clonedStory = randomStory.cloneNode(true);
 
