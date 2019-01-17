@@ -114,6 +114,10 @@ if (fallBackButton) {
 function fixInput() {
     // Verander de input naar 'droom'.
     searchField.value = "Droom";
+
+    filterStories();
+
+    return searchField.value;
 }
 
 // Genre titles
@@ -142,7 +146,7 @@ if (firstStoriesTitle && secondStoriesTitle && thirdStoriesTitle && fourthStorie
 }
 
 // Filter de verhalen
-function filterStories() {
+function filterStories(input) {
     checkUserInput();
     checkAmountOfVisibleTitles();
     checkVisibleTitlesPerGenre('chaotischVerhaal');
@@ -150,18 +154,25 @@ function filterStories() {
     checkVisibleTitlesPerGenre('horrorVerhaal');
     checkVisibleTitlesPerGenre('liefdeVerhaal');
 
-    var input = checkUserInput();
+    checkVisibleTitlesPerGenre('gedownloadVerhaal');
+    checkVisibleTitlesPerGenre('likedVerhaal');
+
+    checkVisibleTitlesPerGenre('resultaatVerhaal');
+
+    input = checkUserInput();
     var visibleTitles = checkAmountOfVisibleTitles();
 
-    // 
+    // Genre stories
     var visibleChaotisch = checkVisibleTitlesPerGenre('chaotischVerhaal');
     var visibleHumor = checkVisibleTitlesPerGenre('humorVerhaal');
     var visibleHorror = checkVisibleTitlesPerGenre('horrorVerhaal');
     var visibleLiefde = checkVisibleTitlesPerGenre('liefdeVerhaal');
 
+    // Visible stories downloadpage
     var visibleDownloads = checkVisibleTitlesPerGenre('gedownloadVerhaal');
     var visibleLiked = checkVisibleTitlesPerGenre('likedVerhaal');
 
+    // Visible stories resultspage
     var visibleResults = checkVisibleTitlesPerGenre('resultaatVerhaal');
         
     if (firstStoriesTitle && secondStoriesTitle && thirdStoriesTitle && fourthStoriesTitle) {
@@ -326,7 +337,7 @@ var allStories = document.querySelectorAll('.stories article');
 var firstStories = document.querySelectorAll('.stories:first-of-type article');
 
 function getRandomStory() {
-    var randomNumber = Math.round(Math.random() * allStories.length-1);
+    var randomNumber = Math.floor(Math.random() * allStories.length);
     var randomStory = allStories[randomNumber];
     var clonedStory = randomStory.cloneNode(true);
     clonedStory.classList.remove('chaotischVerhaal');
@@ -340,14 +351,19 @@ var isToggled = false;
 function surpriseUser() {
     genreButton.classList.toggle('active');
     surpriseButton.classList.toggle('active');
+    
+    if (secondSection) {
+        secondSection.classList.toggle('visually-hidden');
+    }
 
-    secondSection.classList.toggle('visually-hidden');
-    thirdSection.classList.toggle('visually-hidden');
-    fourthSection.classList.toggle('visually-hidden');
+    if (thirdSection) {
+        thirdSection.classList.toggle('visually-hidden');
+        fourthSection.classList.toggle('visually-hidden');    
+    }
 
     firstStories.forEach(function(story) {
         story.classList.toggle('visually-hidden');
-    })
+    });
 
     // Het gegenereerde verhaal is altijd het laatste article in de eerste lijst. 
     // Deze moet weer verwijderd worden wanneer de gebruiker terug gaat naar alle verhalen.
@@ -355,7 +371,15 @@ function surpriseUser() {
     var generatedStory = document.querySelector('.stories:first-of-type article:last-child');
 
     if (!isToggled) {
-        firstStoriesTitle.textContent = "Speciaal voor jou:";
+
+        if (firstStoriesTitle) {
+            firstStoriesTitle.textContent = "Speciaal voor jou:";
+        } else if (downloadsTitle) {
+            downloadsTitle.textContent = "Speciaal voor jou:";
+        } else if (resultsTitle) {
+            resultsTitle.textContent = "Speciaal voor jou:"
+        }
+
         isToggled = true;
         firstSection.classList.toggle('loading');
         setTimeout(function() {
@@ -363,7 +387,13 @@ function surpriseUser() {
             firstSection.appendChild(getRandomStory());
         }, 2000);
     } else {
-        firstStoriesTitle.textContent = "Chaotisch (" + getAllStoriesInGenre('chaotischVerhaal') + ")";
+        if (firstStoriesTitle) {
+            firstStoriesTitle.textContent = "Chaotisch (" + getAllStoriesInGenre('chaotischVerhaal') + ")";
+        } else if (downloadsTitle) {
+            downloadsTitle.textContent = "Gedownloade verhalen (" + getAllStoriesInGenre('gedownloadVerhaal') + ")";
+        } else if (resultsTitle) {
+            resultsTitle.textContent = "3 verhalen gevonden";
+        }
         // Het verhaal wordt weer verwijderd.
         firstSection.removeChild(generatedStory);
         isToggled = false;
