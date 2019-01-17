@@ -1,10 +1,91 @@
-// Animeer het zoekformulier in on click
+
 var theForm = document.querySelector('form#story-search');
 var searchButton = document.querySelector('form#story-search > button');
 var theInput = document.querySelector('form#story-search > fieldset');
 var searchField = document.querySelector('form#story-search > fieldset input');
 var isShown = false;
 
+var theFilter = document.querySelector('form#filter');
+var filterButton = document.querySelector('header > nav button');
+var buttonStripes = document.querySelectorAll('header > nav button > span');
+
+// Verkrijg alle verhalen (voor filtering)
+var allTitles = document.querySelectorAll('.stories article h4');
+
+// Verkrijg de p die het aantal resultaten weergeeft
+var results = document.querySelector('#results');
+var resultsSection = document.querySelector('#resultsSection');
+var fallBackButton = document.querySelector('#fallBackButton');
+
+
+
+// Genre titles
+var firstStoriesTitle = document.querySelector('#chaotischTitle');
+var secondStoriesTitle = document.querySelector('#humorTitle');
+var thirdStoriesTitle = document.querySelector('#horrorTitle');
+var fourthStoriesTitle = document.querySelector('#liefdeTitle');
+
+// Titles for downloads / likes page
+var downloadsTitle = document.querySelector('#downloadsTitle');
+var likesTitle = document.querySelector('#likesTitle');
+
+// Title for resultspage
+var resultsTitle = document.querySelector('#resultsTitle');
+
+var allGenreStoryTitles = [
+    firstStoriesTitle,
+    secondStoriesTitle,
+    thirdStoriesTitle,
+    fourthStoriesTitle,
+]
+
+// Grijp alle downloadbuttons
+var downloadButtons = document.querySelectorAll('button#download');
+var melding = document.querySelector('body > div');
+
+var submitInput = document.querySelector('#sortOptions input[type="submit"]');
+var genreButton = document.querySelector('#sortOptions label');
+var surpriseButton = document.querySelector('#sortOptions label:last-of-type');
+
+var sections = document.querySelectorAll('.genre');
+var firstSection = document.querySelector('.stories:first-of-type');
+var secondSection = sections[1];
+var thirdSection = sections[2];
+var fourthSection = sections[3];
+
+var allStories = document.querySelectorAll('.stories article');
+var firstStories = document.querySelectorAll('.stories:first-of-type article');
+
+var isToggled = false;
+
+if (firstStoriesTitle && secondStoriesTitle && thirdStoriesTitle && fourthStoriesTitle) {
+    firstStoriesTitle.textContent = "Chaotisch (" + getAllStoriesInGenre('chaotischVerhaal') + ")";
+    secondStoriesTitle.textContent = "Humor (" + getAllStoriesInGenre('humorVerhaal') + ")";
+    thirdStoriesTitle.textContent = "Horror (" + getAllStoriesInGenre('horrorVerhaal') + ")";
+    fourthStoriesTitle.textContent = "Liefde (" + getAllStoriesInGenre('liefdeVerhaal') + ")";
+} else if (downloadsTitle && likesTitle) {
+    downloadsTitle.textContent = "Gedownloade verhalen (" + getAllStoriesInGenre('gedownloadVerhaal') + ")";
+    likesTitle.textContent = "Gelikete verhalen (" + getAllStoriesInGenre('likedVerhaal') + ")";
+} else if (resultsTitle) {
+    resultsTitle.textContent = getAllStoriesInGenre('resultaatVerhaal') + " verhalen gevonden";
+}
+
+
+searchField.addEventListener('input', filterStories);
+searchField.addEventListener('keydown', filterStories);
+searchField.addEventListener('keyup', filterStories);
+
+theForm.addEventListener('click', toggleSearchForm);
+filterButton.addEventListener('click', toggleFilter);
+
+for (i = 0; i < downloadButtons.length; i++) {
+    downloadButtons[i].addEventListener('click', loadingState);
+}
+
+submitInput.addEventListener('click', surpriseUser);
+
+
+// Animeer het zoekformulier in on click
 function toggleSearchForm() {
     if (!isShown) {
         theInput.classList.add('show');
@@ -22,16 +103,9 @@ function toggleSearchForm() {
         isShown = false;
     }
 }
-
-theForm.addEventListener('click', toggleSearchForm);
 // Einde animatie
 
-
 // Animeer het filter in on click (inclusief de hamburger strepen)
-var theFilter = document.querySelector('form#filter');
-var filterButton = document.querySelector('header > nav button');
-var buttonStripes = document.querySelectorAll('header > nav button > span');
-
 function toggleFilter() {
     theFilter.classList.toggle('show');
     buttonStripes.forEach(function(buttonStripe){
@@ -39,8 +113,6 @@ function toggleFilter() {
     });
     document.body.classList.toggle('noScroll');
 }
-
-filterButton.addEventListener('click', toggleFilter);
 // Einde filter animatie
 
 // Filter verhalen on type
@@ -66,9 +138,6 @@ function returnArticle(grandParent) {
     var article = returnGrandParent(grandParent).parentElement;
     return article;
 }
-
-// Verkrijg alle verhalen
-var allTitles = document.querySelectorAll('.stories article h4');
 
 // Check welke verhalen er nog zichtbaar zijn
 function checkAmountOfVisibleTitles() {
@@ -97,20 +166,13 @@ function checkVisibleTitlesPerGenre(genre) {
     return visibleTitlesInGenre.length;
 }
 
+// Zorg dat je het totaal aantal verhalen in een bepaald genre
 function getAllStoriesInGenre(genre) {
     var allStories = document.getElementsByClassName(genre);
     return allStories.length;
 }
 
-// Verkrijg de p die het aantal resultaten weergeeft
-var results = document.querySelector('#results');
-var resultsSection = document.querySelector('#resultsSection');
-var fallBackButton = document.querySelector('#fallBackButton');
-
-if (fallBackButton) {
-    fallBackButton.addEventListener('click', fixInput);
-}
-
+// Fix de droom verhalen wanneer fallBackButton gebruikt wordt
 function fixInput() {
     // Zet alle droom verhalen op block
     var droomVerhalen = document.querySelectorAll('.droomVerhaal');
@@ -127,38 +189,6 @@ function fixInput() {
         resultsTitle.classList.remove('visually-hidden');
     }
     searchField.focus();
-}
-
-// Genre titles
-var firstStoriesTitle = document.querySelector('#chaotischTitle');
-var secondStoriesTitle = document.querySelector('#humorTitle');
-var thirdStoriesTitle = document.querySelector('#horrorTitle');
-var fourthStoriesTitle = document.querySelector('#liefdeTitle');
-
-// Titles for downloads / likes page
-var downloadsTitle = document.querySelector('#downloadsTitle');
-var likesTitle = document.querySelector('#likesTitle');
-
-// Title for resultspage
-var resultsTitle = document.querySelector('#resultsTitle');
-
-var allGenreStoryTitles = [
-    firstStoriesTitle,
-    secondStoriesTitle,
-    thirdStoriesTitle,
-    fourthStoriesTitle,
-]
-
-if (firstStoriesTitle && secondStoriesTitle && thirdStoriesTitle && fourthStoriesTitle) {
-    firstStoriesTitle.textContent = "Chaotisch (" + getAllStoriesInGenre('chaotischVerhaal') + ")";
-    secondStoriesTitle.textContent = "Humor (" + getAllStoriesInGenre('humorVerhaal') + ")";
-    thirdStoriesTitle.textContent = "Horror (" + getAllStoriesInGenre('horrorVerhaal') + ")";
-    fourthStoriesTitle.textContent = "Liefde (" + getAllStoriesInGenre('liefdeVerhaal') + ")";
-} else if (downloadsTitle && likesTitle) {
-    downloadsTitle.textContent = "Gedownloade verhalen (" + getAllStoriesInGenre('gedownloadVerhaal') + ")";
-    likesTitle.textContent = "Gelikete verhalen (" + getAllStoriesInGenre('likedVerhaal') + ")";
-} else if (resultsTitle) {
-    resultsTitle.textContent = getAllStoriesInGenre('resultaatVerhaal') + " verhalen gevonden";
 }
 
 // Filter de verhalen
@@ -285,18 +315,6 @@ function filterStories(input) {
     }
 }
 
-searchField.addEventListener('input', filterStories);
-searchField.addEventListener('keydown', filterStories);
-searchField.addEventListener('keyup', filterStories);
-// Einde verhalenfilter
-
-// Download animation
-
-// Grijp alle downloadbuttons
-var downloadButtons = document.querySelectorAll('button#download');
-
-
-var melding = document.querySelector('body > div');
 function showMelding(meldingSoort) {
     melding.classList.add('show');
     melding.classList.add(meldingSoort);
@@ -308,8 +326,7 @@ function deleteMelding() {
     }, 4000);
 }
 
-// Zorg dat de classlist wordt aangepast op hetgeen de gebruiker klikt
-
+// Download animation
 function loadingState() {
     // Bind this to the function so that setTimeout doesn't set it to the window
     var e = this;
@@ -355,27 +372,6 @@ function loadingState() {
     }, 3600);
 }
 
-// Voeg de eventListener toe aan elke downloadbutton
-for (i = 0; i < downloadButtons.length; i++) {
-    downloadButtons[i].addEventListener('click', loadingState);
-}
-
-// End download animation
-
-// Verras me flow
-var submitInput = document.querySelector('#sortOptions input[type="submit"]');
-var genreButton = document.querySelector('#sortOptions label');
-var surpriseButton = document.querySelector('#sortOptions label:last-of-type');
-
-var sections = document.querySelectorAll('.genre');
-var firstSection = document.querySelector('.stories:first-of-type');
-var secondSection = sections[1];
-var thirdSection = sections[2];
-var fourthSection = sections[3];
-
-var allStories = document.querySelectorAll('.stories article');
-var firstStories = document.querySelectorAll('.stories:first-of-type article');
-
 function getRandomStory() {
     var randomNumber = Math.floor(Math.random() * allStories.length);
     var randomStory = allStories[randomNumber];
@@ -385,8 +381,6 @@ function getRandomStory() {
 
     return clonedStory;
 }
-
-var isToggled = false;
 
 function surpriseUser() {
     genreButton.classList.toggle('active');
@@ -441,8 +435,3 @@ function surpriseUser() {
 
     event.preventDefault();
 }
-
-submitInput.addEventListener('click', surpriseUser);
-
-// End verras me flow
-

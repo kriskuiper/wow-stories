@@ -31,7 +31,8 @@ button {
   background-repeat: no-repeat;
   background-size: cover;
   background-color: transparent;
-  color: transparent; }
+  color: transparent;
+  outline: none; }
 
 input[type=submit] {
   cursor: pointer; }
