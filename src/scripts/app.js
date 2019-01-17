@@ -112,12 +112,21 @@ if (fallBackButton) {
 }
 
 function fixInput() {
-    // Verander de input naar 'droom'.
-    searchField.value = "Droom";
-
-    filterStories();
-
-    return searchField.value;
+    // Zet alle droom verhalen op block
+    var droomVerhalen = document.querySelectorAll('.droomVerhaal');
+    droomVerhalen.forEach(function(droomVerhaal) {
+        droomVerhaal.classList.remove('visually-hidden');
+    });
+    if (allGenreStoryTitles) {
+        allGenreStoryTitles.forEach(function(genreStoryTitles) {
+            genreStoryTitles.classList.remove('visually-hidden');
+        });
+    } else if (downloadsTitle) {
+        downloadsTitle.classList.remove('visually-hidden');
+    } else if (resultsTitle) {
+        resultsTitle.classList.remove('visually-hidden');
+    }
+    searchField.focus();
 }
 
 // Genre titles
@@ -132,6 +141,13 @@ var likesTitle = document.querySelector('#likesTitle');
 
 // Title for resultspage
 var resultsTitle = document.querySelector('#resultsTitle');
+
+var allGenreStoryTitles = [
+    firstStoriesTitle,
+    secondStoriesTitle,
+    thirdStoriesTitle,
+    fourthStoriesTitle,
+]
 
 if (firstStoriesTitle && secondStoriesTitle && thirdStoriesTitle && fourthStoriesTitle) {
     firstStoriesTitle.textContent = "Chaotisch (" + getAllStoriesInGenre('chaotischVerhaal') + ")";
@@ -211,6 +227,17 @@ function filterStories(input) {
                 returnArticle(title).classList.remove('visually-hidden');
             });
         }
+
+        if (allGenreStoryTitles) {
+            allGenreStoryTitles.forEach(function(genreStoryTitles) {
+                genreStoryTitles.classList.remove('visually-hidden');
+            });
+        } else if (downloadsTitle) {
+            downloadsTitle.classList.remove('visually-hidden');
+        } else if (resultsTitle) {
+            resultsTitle.classList.remove('visually-hidden');
+        }
+
     } else if (input && visibleTitles <= allTitles.length && visibleTitles >= 1) {
 
         if (results) {
@@ -218,9 +245,12 @@ function filterStories(input) {
             results.textContent =  visibleTitles + " verhalen gevonden.";
 
         }
+
+
         allTitles.forEach(function(title) {
             if (title.textContent.toLowerCase().includes(input.toLowerCase())) {
                 returnArticle(title).classList.remove('visually-hidden');
+
             } else {
                 returnArticle(title).classList.add('visually-hidden');
             }
@@ -242,6 +272,16 @@ function filterStories(input) {
         visibleLiked = 0;
 
         visibleResults = 0;
+
+        if (allGenreStoryTitles) {
+            allGenreStoryTitles.forEach(function(genreStoryTitles) {
+                genreStoryTitles.classList.add('visually-hidden');
+            });
+        } else if (downloadsTitle) {
+            downloadsTitle.classList.add('visually-hidden');
+        } else if (resultsTitle) {
+            resultsTitle.classList.add('visually-hidden');
+        }
     }
 }
 
