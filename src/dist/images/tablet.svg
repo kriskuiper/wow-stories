@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="34.275" height="34.275" viewBox="0 0 34.275 34.275">
+  <g id="Group_222" data-name="Group 222" transform="translate(-363 -331)">
+    <g id="Group_220" data-name="Group 220" transform="translate(77.499 -226.5)">
+      <line id="Line_2" data-name="Line 2" x2="2.468" y2="2.831" transform="translate(298.5 573.118)" fill="none" stroke="#952d87" stroke-linecap="round" stroke-width="3"/>
+      <line id="Line_3" data-name="Line 3" x1="5.386" y2="5.449" transform="translate(300.968 570.5)" fill="none" stroke="#952d87" stroke-linecap="round" stroke-width="3"/>
+    </g>
+    <g id="outline-tablet_mac-24px_1_" data-name="outline-tablet_mac-24px (1)" transform="translate(363 331)">
+      <path id="Path_2877" data-name="Path 2877" d="M0,0H34.275V34.275H0Z" fill="none"/>
+      <path id="Path_2878" data-name="Path 2878" d="M25.564,0H5.57A3.572,3.572,0,0,0,2,3.57V30.705a3.572,3.572,0,0,0,3.57,3.57H25.564a3.572,3.572,0,0,0,3.57-3.57V3.57A3.572,3.572,0,0,0,25.564,0Zm-10,32.847a2.142,2.142,0,1,1,2.142-2.142A2.139,2.139,0,0,1,15.567,32.847Zm10.711-5.713H4.856V4.284H26.278Z" transform="translate(0.856)" fill="#952d87"/>
+    </g>
+  </g>
+</svg>

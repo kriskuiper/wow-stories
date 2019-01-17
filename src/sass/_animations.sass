@@ -40,6 +40,7 @@ body
 
 button#download
     transition: .4s
+    padding: 1.3em
 
 button#download.loading
     background-color: transparent
@@ -65,6 +66,12 @@ button#download.error
 button#download.finished
     background-color: transparent
     background-image: url('../images/downloaded.svg')!important
+    @media screen and (min-width: 30em)
+        background-image: url('../images/tablet.svg')!important
+    @media screen and (min-width: 60em)
+        background-image: url('../images/laptop.svg')!important
+        background-position: center
+        background-size: contain
 
 
 /* Pop up's when download did or did not succeed */
