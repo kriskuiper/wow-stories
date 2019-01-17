@@ -18,7 +18,6 @@ function toggleSearchForm() {
     else {
         theInput.classList.remove('show');
         searchButton.classList.remove('hide');
-
         event.preventDefault();
         isShown = false;
     }
