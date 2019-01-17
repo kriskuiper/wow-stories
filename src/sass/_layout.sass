@@ -216,15 +216,21 @@ body > section:first-of-type > ul
 
 @keyframes agressiveWobble
     from
-        transform: skew(0deg)
+        transform: skew(20deg)
     to
-        transform: skew(-45deg)
+        transform: skew(-20deg)
 
 @keyframes scaleUp
-    from
-        transform: scale(1)
-    to
-        transform: scale(1.2)
+    50%
+        color: black
+    100%
+        color: grey
+
+@keyframes scaleUpRev
+    50%
+        color: white
+    100%
+        color: grey
 
 body#gefrustreerd
     padding: 0
@@ -253,13 +259,22 @@ body#gefrustreerd
             max-width: 50em
             margin: 0 auto
         span
+            margin: 1em
             font-family: 'Uneasy'
             font-size: 1.5em
+            animation-name: scaleUpRev
+            animation-duration: .2s
+            animation-iteration-count: infinite
+            animation-timing-function: step-end
         & > section
             padding: 2em 1em
         & > section:nth-child(even)
             background: $story-dark
             color: white
+            & span
+                animation-name: scaleUp
+                animation-duration: .2s
+                animation-iteration-count: infinite
     footer
         height: 100% 
         & > button

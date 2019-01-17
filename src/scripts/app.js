@@ -114,8 +114,6 @@ if (fallBackButton) {
 function fixInput() {
     // Verander de input naar 'droom'.
     searchField.value = "Droom";
-    // Filter stories on the searchField value, in this case droom
-    filterStories();
 }
 
 
