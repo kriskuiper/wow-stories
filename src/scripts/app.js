@@ -150,7 +150,7 @@ function filterStories() {
 
     if (input === "") {
         // Als er totaal geen input is, doe dan dit:
-        visibleTitles = 15;
+        visibleTitles = allTitles.length;
         visibleChaotisch = getAllStoriesInGenre('chaotischVerhaal');
         visibleHumor = getAllStoriesInGenre('humorVerhaal');
         visibleHorror = getAllStoriesInGenre('horrorVerhaal');
@@ -160,12 +160,12 @@ function filterStories() {
             results.classList.add('visually-hidden');
             fallBackButton.classList.add('visually-hidden');
         }
-        if (visibleTitles === 15) {
+        if (visibleTitles >= allTitles.length) {
             allTitles.forEach(function(title) {
                 returnArticle(title).classList.remove('visually-hidden');
             });
         }
-    } else if (input && visibleTitles <= 15 && visibleTitles >= 1) {
+    } else if (input && visibleTitles <= allTitles.length && visibleTitles >= 1) {
 
         if (results) {
             results.classList.remove('visually-hidden');
