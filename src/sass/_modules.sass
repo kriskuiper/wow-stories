@@ -66,8 +66,11 @@ form#story-search
     fieldset
         position: fixed
         z-index: 1
-        right: .3em
-        left: .3em
+        right: 0
+        left: 0
+        @media screen and (min-width: 30em)
+            right: .3rem
+            left: .3rem
         bottom: -999px
         background: $primary-y
         padding: 2em 5%

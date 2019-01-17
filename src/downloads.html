@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="dist/css/app.min.css">
-    <title>WOW Stories | Home</title>
+    <title>WOW Stories | Downloads en Gelikete verhalen</title>
 </head>
 <body>
     <header>
@@ -83,7 +83,7 @@
     </form>
     <!-- Gedownloade verhalen -->
     <section class="genre">
-        <h2>Gedownloade verhalen (2)</h2>
+        <h2 id="downloadsTitle">Gedownloade verhalen</h2>
         <section class="stories">
             <h3 class="visually-hidden">Verhalen die door jou gedownload zijn</h3>
             <article class="gedownloadVerhaal">
@@ -131,10 +131,10 @@
     <!-- End gedownloade verhalen -->
     <!-- Gelikete verhalen -->
     <section class="genre">
-        <h2>Gelikete verhalen (3)</h2>
+        <h2 id="likesTitle">Gelikete verhalen</h2>
         <section class="stories">
             <h3 class="visually-hidden">Verhalen die door jou geliket zijn</h3>
-            <article class="geliketVerhaal">
+            <article class="likedVerhaal">
                 <footer>
                     <a href="#">
                         <figure>
@@ -154,7 +154,7 @@
                     </ul>
                 </header>
             </article>
-            <article class="geliketVerhaal">
+            <article class="likedVerhaal">
                 <footer>
                     <a href="#">
                         <figure>
@@ -174,7 +174,7 @@
                     </ul>
                 </header>
             </article>
-            <article class="geliketVerhaal">
+            <article class="likedVerhaal">
                 <footer>
                     <a href="#">
                         <figure>
@@ -204,6 +204,9 @@
             <input type="search" id="searchInput" placeholder="Zoek op naam...">
         </fieldset>
     </form>
+    <div>
+        <p>Is het verhaal gedownload of niet</p>
+    </div>
     <script src="dist/scripts/app.min.js"></script>
 </body>
 </html>

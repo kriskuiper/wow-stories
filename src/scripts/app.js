@@ -26,6 +26,7 @@ function toggleSearchForm() {
 theForm.addEventListener('click', toggleSearchForm);
 // Einde animatie
 
+
 // Animeer het filter in on click (inclusief de hamburger strepen)
 var theFilter = document.querySelector('form#filter');
 var filterButton = document.querySelector('header > nav button');
@@ -115,16 +116,30 @@ function fixInput() {
     searchField.value = "Droom";
 }
 
-
+// Genre titles
 var firstStoriesTitle = document.querySelector('#chaotischTitle');
 var secondStoriesTitle = document.querySelector('#humorTitle');
 var thirdStoriesTitle = document.querySelector('#horrorTitle');
 var fourthStoriesTitle = document.querySelector('#liefdeTitle');
 
-firstStoriesTitle.textContent = "Chaotisch (" + getAllStoriesInGenre('chaotischVerhaal') + ")";
-secondStoriesTitle.textContent = "Humor (" + getAllStoriesInGenre('humorVerhaal') + ")";
-thirdStoriesTitle.textContent = "Horror (" + getAllStoriesInGenre('horrorVerhaal') + ")";
-fourthStoriesTitle.textContent = "Liefde (" + getAllStoriesInGenre('liefdeVerhaal') + ")";
+// Titles for downloads / likes page
+var downloadsTitle = document.querySelector('#downloadsTitle');
+var likesTitle = document.querySelector('#likesTitle');
+
+// Title for resultspage
+var resultsTitle = document.querySelector('#resultsTitle');
+
+if (firstStoriesTitle && secondStoriesTitle && thirdStoriesTitle && fourthStoriesTitle) {
+    firstStoriesTitle.textContent = "Chaotisch (" + getAllStoriesInGenre('chaotischVerhaal') + ")";
+    secondStoriesTitle.textContent = "Humor (" + getAllStoriesInGenre('humorVerhaal') + ")";
+    thirdStoriesTitle.textContent = "Horror (" + getAllStoriesInGenre('horrorVerhaal') + ")";
+    fourthStoriesTitle.textContent = "Liefde (" + getAllStoriesInGenre('liefdeVerhaal') + ")";
+} else if (downloadsTitle && likesTitle) {
+    downloadsTitle.textContent = "Gedownloade verhalen (" + getAllStoriesInGenre('gedownloadVerhaal') + ")";
+    likesTitle.textContent = "Gelikete verhalen (" + getAllStoriesInGenre('likedVerhaal') + ")";
+} else if (resultsTitle) {
+    resultsTitle.textContent = getAllStoriesInGenre('resultaatVerhaal') + " verhalen gevonden";
+}
 
 // Filter de verhalen
 function filterStories() {
@@ -138,15 +153,30 @@ function filterStories() {
     var input = checkUserInput();
     var visibleTitles = checkAmountOfVisibleTitles();
 
+    // 
     var visibleChaotisch = checkVisibleTitlesPerGenre('chaotischVerhaal');
     var visibleHumor = checkVisibleTitlesPerGenre('humorVerhaal');
     var visibleHorror = checkVisibleTitlesPerGenre('horrorVerhaal');
     var visibleLiefde = checkVisibleTitlesPerGenre('liefdeVerhaal');
+
+    var visibleDownloads = checkVisibleTitlesPerGenre('gedownloadVerhaal');
+    var visibleLiked = checkVisibleTitlesPerGenre('likedVerhaal');
+
+    var visibleResults = checkVisibleTitlesPerGenre('resultaatVerhaal');
         
-    firstStoriesTitle.textContent = "Chaotisch (" + visibleChaotisch + ")";
-    secondStoriesTitle.textContent = "Humor (" + visibleHumor + ")";
-    thirdStoriesTitle.textContent = "Horror (" + visibleHorror + ")";
-    fourthStoriesTitle.textContent = "Liefde (" + visibleLiefde + ")";
+    if (firstStoriesTitle && secondStoriesTitle && thirdStoriesTitle && fourthStoriesTitle) {
+        if (firstStoriesTitle) {
+            firstStoriesTitle.textContent = "Chaotisch (" + visibleChaotisch + ")";
+            secondStoriesTitle.textContent = "Humor (" + visibleHumor + ")";
+            thirdStoriesTitle.textContent = "Horror (" + visibleHorror + ")";
+            fourthStoriesTitle.textContent = "Liefde (" + visibleLiefde + ")";
+        } else if (downloadsTitle) {
+            downloadsTitle.textContent = "Gedownloade verhalen (" + visibleDownloads + ")";
+            likesTitle.textContent = "Gelikete verhalen (" + visibleLiked + ")";
+        } else if (resultsTitle) {
+            resultsTitle.textContent = visibleResults + " verhalen gevonden";
+        }
+    }
 
     if (input === "") {
         // Als er totaal geen input is, doe dan dit:
@@ -155,6 +185,11 @@ function filterStories() {
         visibleHumor = getAllStoriesInGenre('humorVerhaal');
         visibleHorror = getAllStoriesInGenre('horrorVerhaal');
         visibleLiefde = getAllStoriesInGenre('liefdeVerhaal');
+
+        visibleDownloads = getAllStoriesInGenre('gedownloadVerhaal');
+        visibleLiked = getAllStoriesInGenre('likedVerhaal')
+
+        visibleResults = getAllStoriesInGenre('resultaatVerhaal');
 
         if (results && fallBackButton) {
             results.classList.add('visually-hidden');
@@ -191,6 +226,11 @@ function filterStories() {
         visibleHumor = 0;
         visibleHorror = 0;
         visibleLiefde = 0;
+
+        visibleDownloads = 0;
+        visibleLiked = 0;
+
+        visibleResults = 0;
     }
 }
 

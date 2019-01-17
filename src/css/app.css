@@ -530,12 +530,16 @@ form#story-search {
   form#story-search fieldset {
     position: fixed;
     z-index: 1;
-    right: .3em;
-    left: .3em;
+    right: 0;
+    left: 0;
     bottom: -999px;
     background: #FFDF5D;
     padding: 2em 5%;
     transition: all .5s ease; }
+    @media screen and (min-width: 30em) {
+      form#story-search fieldset {
+        right: .3rem;
+        left: .3rem; } }
     @media screen and (min-width: 30em) {
       form#story-search fieldset {
         padding: 2em 10%; } }
